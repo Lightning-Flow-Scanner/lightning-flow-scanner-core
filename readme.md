@@ -1,5 +1,14 @@
 # Lightning Flow Scanner(Rule Engine)
 
+[![Version](https://img.shields.io/npm/v/lightning-flow-scanner-core.svg)](https://npmjs.org/package/lightning-flow-scanner-core)
+[![Downloads/week](https://img.shields.io/npm/dw/lightning-flow-scanner-core.svg)](https://npmjs.org/package/lightning-flow-scanner-core)
+[![Downloads/total](https://img.shields.io/npm/dt/lightning-flow-scanner-core.svg)](https://npmjs.org/package/lightning-flow-scanner-core)
+[![GitHub stars](https://img.shields.io/github/stars/Force-Config-Control/lightning-flow-scanner-core)](https://GitHub.com/Force-Config-Control/lightning-flow-scanner-core/stargazers/)
+[![GitHub contributors](https://img.shields.io/github/contributors/Force-Config-Control/lightning-flow-scanner-core.svg)](https://gitHub.com/Force-Config-Control/lightning-flow-scanner-core/graphs/contributors/)
+[![License](https://img.shields.io/npm/l/lightning-flow-scanner-core.svg)](https://github.com/Force-Config-Control/lightning-flow-scanner-core/blob/main/package.json)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
+
 ##### _This the rule engine is used in both the [VSCode extension](https://marketplace.visualstudio.com/items?itemName=ForceConfigControl.lightningflowscanner&ssr=false#review-details) and the [SFDX plugin](https://www.npmjs.com/package/lightning-flow-scanner) of the same name._
 
 ## Available Rules:
