@@ -2,6 +2,7 @@ import { IRuleDefinition } from './main/interfaces/IRuleDefinition';
 import { IRulesConfig } from './main/interfaces/IRulesConfig';
 import { FixFlows } from './main/libs/FixFlows';
 import { GetRuleDefinitions } from './main/libs/GetRuleDefinitions';
+import { callGenerateOutputFile } from './main/libs/OutputFile';
 import { ScanFlows } from './main/libs/ScanFlows';
 import { Flow } from './main/models/Flow';
 import { ResultDetails } from './main/models/ResultDetails';
@@ -54,3 +55,6 @@ export function scan(flows: Flow[], ruleOptions?: IRulesConfig): ScanResult[] {
 export function fix(flows: Flow[]): ScanResult[] {
   return FixFlows(flows);
 }
+
+// Make the method available from module root
+export const generateOutputFile = callGenerateOutputFile;
