@@ -10,5 +10,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [v2.27.0] - 2023-12-16
 
-- Expose a method **generateOutputFile** so it can be called from both sfdx plugin & VsCode Extension
-
+- Expose a method **generateOutputFile** so it can be called from both sfdx plugin & VsCode Extension, with fields:
+  - Flow API Name
+  - Rule Name
+  - Item
+  - Severity
+  - Rule description
+  - Rule Type
+  - Flow Type
+  - Flow Label
