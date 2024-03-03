@@ -19,7 +19,6 @@ export function ScanFlows(flows: core.Flow[], rulesConfig?: Map<string, {}>): co
       const ruleResults: core.RuleResult[] = [];
       for (const rule of selectedRules) {
         if (rule.supportedTypes.includes(flow.type[0])) {
-          try {
             let config = undefined;
             if (rulesConfig) {
               const configKeys = keys(rulesConfig);
@@ -32,9 +31,6 @@ export function ScanFlows(flows: core.Flow[], rulesConfig?: Map<string, {}>): co
               result.severity = rule.severity;
             }
             ruleResults.push(result);
-          } catch (error) { 
-            throw new error("Something went wrong while executing " + rule.name + " in the Flow: '" + flow.name + "'");
-          }
         }
       }
       flowResults.push(new core.ScanResult(flow, ruleResults));
