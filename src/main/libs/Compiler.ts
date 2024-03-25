@@ -1,4 +1,5 @@
-import { Flow, FlowNode } from "../internals";
+import Flow from "../models/Flow";
+import FlowNode from "../models/FlowNode";
 
 export default class Compiler {
     public visitedElements: Set<string>;
