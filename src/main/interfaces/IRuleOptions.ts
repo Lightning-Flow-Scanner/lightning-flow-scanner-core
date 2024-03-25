@@ -1,5 +1,5 @@
-import { IRulesConfig } from "../internals";
+import { IRuleConfig } from "./IRuleConfig";
 
 export interface IRuleOptions {
-  [ruleName: string]: IRulesConfig;
+  [ruleName: string]: IRuleConfig;
 }

@@ -1,4 +1,5 @@
-import { Flow, RuleResult } from "../internals";
+import Flow from "../models/Flow";
+import RuleResult from "../models/RuleResult";
 
 export default interface IRuleDefinition {
   name: string;
