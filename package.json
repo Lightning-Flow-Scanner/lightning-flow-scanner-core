@@ -2,7 +2,7 @@
   "name": "lightning-flow-scanner-core",
   "version": "2.30.0",
   "main": "out/**",
-  "types": "index.d.ts",
+  "types": "out/index.d.ts",
   "scripts": {
     "test": "mocha -r ts-node/register tests/**/*.test.ts",
     "build": "tsc"
