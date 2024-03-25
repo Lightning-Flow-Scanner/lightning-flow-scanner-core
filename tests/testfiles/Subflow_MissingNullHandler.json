@@ -1,0 +1,409 @@
+{
+    "Flow": {
+        "$": {
+            "xmlns": "http://soap.sforce.com/2006/04/metadata"
+        },
+        "apiVersion": [
+            "60.0"
+        ],
+        "assignments": [
+            {
+                "name": [
+                    "Set_Error_Message"
+                ],
+                "label": [
+                    "Set Error Message"
+                ],
+                "locationX": [
+                    "314"
+                ],
+                "locationY": [
+                    "350"
+                ],
+                "assignmentItems": [
+                    {
+                        "assignToReference": [
+                            "errorMessage"
+                        ],
+                        "operator": [
+                            "Assign"
+                        ],
+                        "value": [
+                            {
+                                "stringValue": [
+                                    "Error when retrieving records"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "decisions": [
+            {
+                "name": [
+                    "Check_object_type"
+                ],
+                "label": [
+                    "Check object type"
+                ],
+                "locationX": [
+                    "578"
+                ],
+                "locationY": [
+                    "134"
+                ],
+                "defaultConnectorLabel": [
+                    "Default Outcome"
+                ],
+                "rules": [
+                    {
+                        "name": [
+                            "User"
+                        ],
+                        "conditionLogic": [
+                            "and"
+                        ],
+                        "conditions": [
+                            {
+                                "leftValueReference": [
+                                    "recordId"
+                                ],
+                                "operator": [
+                                    "StartsWith"
+                                ],
+                                "rightValue": [
+                                    {
+                                        "stringValue": [
+                                            "005"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "connector": [
+                            {
+                                "targetReference": [
+                                    "Get_User"
+                                ]
+                            }
+                        ],
+                        "label": [
+                            "User"
+                        ]
+                    },
+                    {
+                        "name": [
+                            "Queue"
+                        ],
+                        "conditionLogic": [
+                            "and"
+                        ],
+                        "conditions": [
+                            {
+                                "leftValueReference": [
+                                    "recordId"
+                                ],
+                                "operator": [
+                                    "StartsWith"
+                                ],
+                                "rightValue": [
+                                    {
+                                        "stringValue": [
+                                            "00G"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "connector": [
+                            {
+                                "targetReference": [
+                                    "Get_Queue"
+                                ]
+                            }
+                        ],
+                        "label": [
+                            "Queue"
+                        ]
+                    }
+                ]
+            }
+        ],
+        "description": [
+            "Subflow that throws MissingNullHandler"
+        ],
+        "environments": [
+            "Default"
+        ],
+        "interviewLabel": [
+            "Subflow_Missing {!$Flow.CurrentDateTime}"
+        ],
+        "label": [
+            "Subflow_MissingNullHandler"
+        ],
+        "processMetadataValues": [
+            {
+                "name": [
+                    "BuilderType"
+                ],
+                "value": [
+                    {
+                        "stringValue": [
+                            "LightningFlowBuilder"
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": [
+                    "CanvasMode"
+                ],
+                "value": [
+                    {
+                        "stringValue": [
+                            "AUTO_LAYOUT_CANVAS"
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": [
+                    "OriginBuilderType"
+                ],
+                "value": [
+                    {
+                        "stringValue": [
+                            "LightningFlowBuilder"
+                        ]
+                    }
+                ]
+            }
+        ],
+        "processType": [
+            "AutoLaunchedFlow"
+        ],
+        "recordLookups": [
+            {
+                "name": [
+                    "Get_Queue"
+                ],
+                "label": [
+                    "Get Queue"
+                ],
+                "locationX": [
+                    "578"
+                ],
+                "locationY": [
+                    "242"
+                ],
+                "assignNullValuesIfNoRecordsFound": [
+                    "true"
+                ],
+                "faultConnector": [
+                    {
+                        "isGoTo": [
+                            "true"
+                        ],
+                        "targetReference": [
+                            "Set_Error_Message"
+                        ]
+                    }
+                ],
+                "filterLogic": [
+                    "and"
+                ],
+                "filters": [
+                    {
+                        "field": [
+                            "Type"
+                        ],
+                        "operator": [
+                            "EqualTo"
+                        ],
+                        "value": [
+                            {
+                                "stringValue": [
+                                    "Queue"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "field": [
+                            "Id"
+                        ],
+                        "operator": [
+                            "EqualTo"
+                        ],
+                        "value": [
+                            {
+                                "elementReference": [
+                                    "recordId"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "object": [
+                    "Group"
+                ],
+                "outputReference": [
+                    "queueRecord"
+                ],
+                "queriedFields": [
+                    "Id"
+                ]
+            },
+            {
+                "name": [
+                    "Get_User"
+                ],
+                "label": [
+                    "Get User"
+                ],
+                "locationX": [
+                    "50"
+                ],
+                "locationY": [
+                    "242"
+                ],
+                "assignNullValuesIfNoRecordsFound": [
+                    "true"
+                ],
+                "faultConnector": [
+                    {
+                        "targetReference": [
+                            "Set_Error_Message"
+                        ]
+                    }
+                ],
+                "filterLogic": [
+                    "and"
+                ],
+                "filters": [
+                    {
+                        "field": [
+                            "Id"
+                        ],
+                        "operator": [
+                            "EqualTo"
+                        ],
+                        "value": [
+                            {
+                                "elementReference": [
+                                    "recordId"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "object": [
+                    "User"
+                ],
+                "outputReference": [
+                    "userRecord"
+                ],
+                "queriedFields": [
+                    "Id"
+                ]
+            }
+        ],
+        "start": [
+            {
+                "locationX": [
+                    "452"
+                ],
+                "locationY": [
+                    "0"
+                ],
+                "connector": [
+                    {
+                        "targetReference": [
+                            "Check_object_type"
+                        ]
+                    }
+                ]
+            }
+        ],
+        "status": [
+            "Draft"
+        ],
+        "variables": [
+            {
+                "name": [
+                    "errorMessage"
+                ],
+                "dataType": [
+                    "String"
+                ],
+                "isCollection": [
+                    "false"
+                ],
+                "isInput": [
+                    "false"
+                ],
+                "isOutput": [
+                    "true"
+                ]
+            },
+            {
+                "name": [
+                    "queueRecord"
+                ],
+                "dataType": [
+                    "SObject"
+                ],
+                "isCollection": [
+                    "false"
+                ],
+                "isInput": [
+                    "false"
+                ],
+                "isOutput": [
+                    "true"
+                ],
+                "objectType": [
+                    "Group"
+                ]
+            },
+            {
+                "name": [
+                    "recordId"
+                ],
+                "dataType": [
+                    "String"
+                ],
+                "isCollection": [
+                    "false"
+                ],
+                "isInput": [
+                    "true"
+                ],
+                "isOutput": [
+                    "false"
+                ]
+            },
+            {
+                "name": [
+                    "userRecord"
+                ],
+                "dataType": [
+                    "SObject"
+                ],
+                "isCollection": [
+                    "false"
+                ],
+                "isInput": [
+                    "false"
+                ],
+                "isOutput": [
+                    "true"
+                ],
+                "objectType": [
+                    "User"
+                ]
+            }
+        ]
+    }
+}
