@@ -28,7 +28,7 @@ describe('A flow with incorrect naming and set exception', () => {
             AAAA: 
                 {"FlowName":["AAAA"]}
         }
-    };
+    } as core.IRulesConfig;
 
     const results: core.ScanResult[] = core.scan([flow], ruleConfig);
     expect(results[0].ruleResults.length).to.equal(1);

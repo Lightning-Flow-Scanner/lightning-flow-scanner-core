@@ -1,5 +1,5 @@
-import Flow from './Flow';
-import RuleResult from './RuleResult';
+import Flow from "./Flow";
+import RuleResult from "./RuleResult";
 
 export default class ScanResult {
 

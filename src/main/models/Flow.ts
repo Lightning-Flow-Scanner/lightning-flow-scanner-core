@@ -1,8 +1,8 @@
-import FlowNode from './FlowNode';
+import * as p from 'path';
 import { FlowMetadata } from './FlowMetadata';
 import FlowElement from './FlowElement';
 import FlowVariable from './FlowVariable';
-import * as p from 'path';
+import FlowNode from './FlowNode';
 
 export default class Flow {
 

@@ -22,7 +22,7 @@ describe('The DuplicateDMLOperation Rule ', () => {
             severity: 'error',
           },
         },
-    };
+    } as core.IRulesConfig;
     const results: core.ScanResult[] = core.scan([flow], ruleConfig);
     expect(results[0].ruleResults.length).to.equal(1);
     expect(results[0].ruleResults[0].ruleName).to.equal('DuplicateDMLOperation');
@@ -41,7 +41,7 @@ describe('The DuplicateDMLOperation Rule ', () => {
             severity: 'error',
           },
         },
-    };
+    } as core.IRulesConfig;
 
     const results: core.ScanResult[] = core.scan([flow], ruleConfig);
     expect(results[0].ruleResults.length).to.equal(1);
@@ -67,7 +67,7 @@ describe('The DuplicateDMLOperation Rule ', () => {
             CreateANewAccountWithChild: 
                 {"DuplicateDMLOperation":["ViewAccountId"]}
         }
-    };
+    } as core.IRulesConfig;
 
     const results: core.ScanResult[] = core.scan([flow], ruleConfig);
     expect(results[0].ruleResults.length).to.equal(1);
@@ -98,7 +98,7 @@ describe('The DuplicateDMLOperation Rule ', () => {
           CreateANewAccountWithChild: 
             { "DuplicateDMLOperation": ["ViewAccountId", "ViewAccountId_0"] }
         }
-      };
+      } as core.IRulesConfig;
   
     const results: core.ScanResult[] = core.scan([flow], ruleConfig);
     const ruleResult = results[0].ruleResults.find(
@@ -124,7 +124,7 @@ describe('The DuplicateDMLOperation Rule ', () => {
             severity: 'error',
           },
         },
-    };
+    } as core.IRulesConfig;
     const results: core.ScanResult[] = core.scan([flow], ruleConfig);
     expect(results[0].ruleResults[0].occurs).to.equal(false);
   });
@@ -141,7 +141,7 @@ describe('The DuplicateDMLOperation Rule ', () => {
             severity: 'error',
           },
         },
-    };
+    } as core.IRulesConfig;
     const results: core.ScanResult[] = core.scan([flow], ruleConfig);
     expect(results[0].ruleResults.length).to.equal(1);
     expect(results[0].ruleResults[0].ruleName).to.equal('DuplicateDMLOperation');
@@ -160,7 +160,7 @@ describe('The DuplicateDMLOperation Rule ', () => {
             severity: 'error',
           },
         },
-    };
+    } as core.IRulesConfig;
     const results: core.ScanResult[] = core.scan([flow], ruleConfig);
     expect(results[0].ruleResults.length).to.equal(1);
     expect(results[0].ruleResults[0].ruleName).to.equal('DuplicateDMLOperation');

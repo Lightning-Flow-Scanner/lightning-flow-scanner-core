@@ -1,5 +1,5 @@
-import IRuleDefinition from "../interfaces/IRuleDefinition";
 import path from 'path'; // Import the path module
+import { IRuleDefinition } from '../internals';
 
 export class RuleLoader {
     static loadCustomRule(ruleName: string, filePath: string): IRuleDefinition | undefined {

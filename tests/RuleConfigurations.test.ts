@@ -33,7 +33,7 @@ describe('Rule Configurations ', () => {
               CreateANewAccountWithChild: 
                   {"DuplicateDMLOperation":["ViewAccountId"]}
           }
-      };
+      } as core.IRulesConfig;
     const results: core.ScanResult[] = core.scan([flow2], ruleConfig);
     const rules = core.getRules();
     expect(results[0].ruleResults.length).to.equal(rules.length);

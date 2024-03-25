@@ -22,7 +22,7 @@ describe('In a normal flow without copied elements', () => {
             severity: 'error',
           },
         },
-    };
+    } as core.IRulesConfig;
 
     const results: core.ScanResult[] = core.scan([flow], ruleConfig);
 

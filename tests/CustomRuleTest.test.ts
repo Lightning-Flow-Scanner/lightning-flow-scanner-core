@@ -20,7 +20,7 @@ describe('A custom rule', () => {
                     path: './src/data/CustomRuleExample.ts'
                 }
             }
-        };
+        } as core.IRulesConfig;
 
         const results: core.ScanResult[] = core.scan([flow], ruleConfig);
         expect(results[0].ruleResults[0].occurs).to.equal(true);

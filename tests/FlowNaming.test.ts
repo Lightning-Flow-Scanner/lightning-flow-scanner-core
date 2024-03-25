@@ -23,7 +23,7 @@ describe('A flow with correct naming', () => {
                     expression: '[A-Za-z0-9]'
                 },
         }
-    };
+    } as core.IRulesConfig;
 
     const results: core.ScanResult[] = core.scan([flow], ruleConfig);
     expect(results[0].ruleResults.length).to.equal(1);

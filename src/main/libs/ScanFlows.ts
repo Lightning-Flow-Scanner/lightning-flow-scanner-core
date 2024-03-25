@@ -1,11 +1,11 @@
+import { Flow, IRuleDefinition, RuleResult, ScanResult } from '../internals';
 import { GetRuleDefinitions } from './GetRuleDefinitions';
 import { keys } from './Keys';
-import * as core from '../../index';
 
-export function ScanFlows(flows: core.Flow[], rulesConfig?: Map<string, {}>): core.ScanResult[] {
+export function ScanFlows(flows: Flow[], rulesConfig?: Map<string, {}>): ScanResult[] {
 
-  const flowResults: core.ScanResult[] = [];
-  let selectedRules: core.IRuleDefinition[] = [];
+  const flowResults: ScanResult[] = [];
+  let selectedRules: IRuleDefinition[] = [];
   if (rulesConfig) {
     selectedRules = GetRuleDefinitions(rulesConfig);
   } else {
@@ -15,7 +15,7 @@ export function ScanFlows(flows: core.Flow[], rulesConfig?: Map<string, {}>): co
   for (const flow of flows) {
 
     try{
-      const ruleResults: core.RuleResult[] = [];
+      const ruleResults: RuleResult[] = [];
       for (const rule of selectedRules) {
         if (rule.supportedTypes.includes(flow.type[0])) {
           try {
@@ -35,10 +35,10 @@ export function ScanFlows(flows: core.Flow[], rulesConfig?: Map<string, {}>): co
             throw new error("Something went wrong while executing " + rule.name + " in the Flow: '" + flow.name + "'");
           }
         } else {
-          ruleResults.push(new core.RuleResult(rule, []));
+          ruleResults.push(new RuleResult(rule, []));
         }
       }
-      flowResults.push(new core.ScanResult(flow, ruleResults));
+      flowResults.push(new ScanResult(flow, ruleResults));
     }
     catch (error) { 
       console.log(error.message)

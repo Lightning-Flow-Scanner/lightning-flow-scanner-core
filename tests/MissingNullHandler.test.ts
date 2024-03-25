@@ -24,7 +24,7 @@ describe('When scanning a flow without null handlers', () => {
                     severity: 'error',
                 },
             }
-        };
+        } as core.IRulesConfig;
         const results: core.ScanResult[] = core.scan([flow], ruleConfig);
         expect(results[0].ruleResults[0].ruleName).to.equal('MissingNullHandler')
         expect(results[0].ruleResults[0].occurs).to.equal(true);

@@ -24,7 +24,7 @@ describe('aaaaaaaa', () => {
                     severity: 'error',
                 },
             }
-        };
+        } as core.IRulesConfig;
 
         const results: core.ScanResult[] = core.scan([flow], ruleConfig);
         expect(results[0].ruleResults.length).to.equal(1);

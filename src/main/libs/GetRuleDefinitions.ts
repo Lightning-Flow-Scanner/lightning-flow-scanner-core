@@ -1,4 +1,4 @@
-import IRuleDefinition from '../interfaces/IRuleDefinition';
+import { IRuleDefinition } from '../internals';
 import { DefaultRuleStore } from '../store/DefaultRuleStore';
 import { DynamicRule } from './DynamicRule';
 import { RuleLoader } from './RuleLoader';

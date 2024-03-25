@@ -23,7 +23,7 @@ describe('A flow with the API version attribute below the configured threshold',
                     expression: '>55'
                 },
         }
-    };
+    } as core.IRulesConfig;
 
     const results: core.ScanResult[] = core.scan([flow], ruleConfig);
     expect(results[0].ruleResults.length).to.equal(1);

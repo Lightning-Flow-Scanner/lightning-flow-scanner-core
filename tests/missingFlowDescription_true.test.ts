@@ -23,7 +23,7 @@ describe('When scanning a flow without description', () => {
             severity: 'error',
           },
         },
-    };
+    } as core.IRulesConfig;
 
     const results: core.ScanResult[] = core.scan([flow], ruleConfig);
 

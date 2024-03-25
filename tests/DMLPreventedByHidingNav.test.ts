@@ -23,7 +23,7 @@ describe('A screen flow with a DML statements between where the screen after the
                     severity: 'error',
                 },
         }
-    };
+    } as core.IRulesConfig;
 
     const results: core.ScanResult[] = core.scan([flow], ruleConfig);
     expect(results[0].ruleResults.length).to.equal(1);

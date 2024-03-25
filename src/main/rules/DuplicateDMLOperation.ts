@@ -1,5 +1,5 @@
 import { RuleCommon } from '../models/RuleCommon';
-import * as core from '../../index';
+import * as core from './../internals';
 
 export class DuplicateDMLOperation extends RuleCommon implements core.IRuleDefinition {
 
