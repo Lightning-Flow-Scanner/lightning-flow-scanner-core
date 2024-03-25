@@ -1,3 +1,4 @@
+import { AutoLayout } from '../rules/AutoLayout';
 import { APIVersion } from '../rules/APIVersion';
 import { CopyAPIName } from '../rules/CopyAPIName';
 import { DMLStatementInLoop } from '../rules/DMLStatementInLoop';
@@ -13,6 +14,7 @@ import { UnusedVariable } from '../rules/UnusedVariable';
 
 export const DefaultRuleStore: {} = {
   APIVersion,
+  AutoLayout,
   CopyAPIName,
   DMLStatementInLoop,
   DuplicateDMLOperation,
