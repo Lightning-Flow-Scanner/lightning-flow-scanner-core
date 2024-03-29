@@ -1,12 +1,12 @@
-import IRuleDefinition from './main/interfaces/IRuleDefinition';
+import {IRuleDefinition} from './main/interfaces/IRuleDefinition';
 import { IRulesConfig } from './main/interfaces/IRulesConfig';
 import { FixFlows } from './main/libs/FixFlows';
 import { GetRuleDefinitions } from './main/libs/GetRuleDefinitions';
 import { ScanFlows } from './main/libs/ScanFlows';
-import Flow from './main/models/Flow';
-import ResultDetails from './main/models/ResultDetails';
-import RuleResult from './main/models/RuleResult';
-import ScanResult from './main/models/ScanResult';
+import {Flow} from './main/models/Flow';
+import {ResultDetails} from './main/models/ResultDetails';
+import {RuleResult} from './main/models/RuleResult';
+import {ScanResult} from './main/models/ScanResult';
 
 export function getRules(ruleNames?: string[]): IRuleDefinition[] {
   if (ruleNames && ruleNames.length > 0) {
@@ -57,14 +57,14 @@ export function fix(flows: Flow[]): ScanResult[] {
 }
 
 
-export { default as Flow } from './main/models/Flow';
-export { default as FlowAttribute } from './main/models/FlowAttribute';
-export { default as FlowElement } from './main/models/FlowElement';
-export { default as FlowNode } from './main/models/FlowNode';
-export { default as FlowType } from './main/models/FlowType';
-export { default as FlowVariable } from './main/models/FlowVariable';
-export { default as Compiler } from './main/libs/Compiler';
-export { default as ScanResult } from './main/models/ScanResult';
-export { default as RuleResult } from './main/models/RuleResult';
-export { default as ResultDetails } from './main/models/ResultDetails';
-export { default as IRuleDefinition } from './main/interfaces/IRuleDefinition';
+export { Flow } from './main/models/Flow';
+export { FlowAttribute } from './main/models/FlowAttribute';
+export { FlowElement } from './main/models/FlowElement';
+export { FlowNode } from './main/models/FlowNode';
+export { FlowType } from './main/models/FlowType';
+export { FlowVariable } from './main/models/FlowVariable';
+export { Compiler } from './main/libs/Compiler';
+export { ScanResult } from './main/models/ScanResult';
+export { RuleResult } from './main/models/RuleResult';
+export { ResultDetails } from './main/models/ResultDetails';
+export { IRuleDefinition } from './main/interfaces/IRuleDefinition';

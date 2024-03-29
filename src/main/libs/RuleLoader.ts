@@ -1,4 +1,4 @@
-import IRuleDefinition from "../interfaces/IRuleDefinition";
+import {IRuleDefinition} from "../interfaces/IRuleDefinition";
 import path from 'path'; // Import the path module
 
 export class RuleLoader {
