@@ -140,6 +140,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/path-browserify@npm:^1":
+  version: 1.0.2
+  resolution: "@types/path-browserify@npm:1.0.2"
+  checksum: 10c0/4140970d1d171760a63e2be7ae050e12b7035e99205d190f12b039c0afb5dc975352a913a7fde0997e38e74102f3496c73f49128c126492ca5d1498a0f1a5206
+  languageName: node
+  linkType: hard
+
 "@ungap/promise-all-settled@npm:1.1.2":
   version: 1.1.2
   resolution: "@ungap/promise-all-settled@npm:1.1.2"
@@ -1088,9 +1095,11 @@ __metadata:
     "@types/chai": "npm:^4.2.21"
     "@types/mocha": "npm:^9.0.0"
     "@types/node": "npm:^20.4.5"
+    "@types/path-browserify": "npm:^1"
     chai: "npm:^4.3.4"
     logging: "npm:^3.3.0"
     mocha: "npm:^9.1.1"
+    path-browserify: "npm:^1.0.1"
     ts-node: "npm:^10.2.1"
     tslint: "npm:^6.1.3"
     typescript: "npm:^4.3.4"
@@ -1453,6 +1462,13 @@ __metadata:
   dependencies:
     aggregate-error: "npm:^3.0.0"
   checksum: 10c0/592c05bd6262c466ce269ff172bb8de7c6975afca9b50c975135b974e9bdaafbfe80e61aaaf5be6d1200ba08b30ead04b88cfa7e25ff1e3b93ab28c9f62a2c75
+  languageName: node
+  linkType: hard
+
+"path-browserify@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "path-browserify@npm:1.0.1"
+  checksum: 10c0/8b8c3fd5c66bd340272180590ae4ff139769e9ab79522e2eb82e3d571a89b8117c04147f65ad066dccfb42fcad902e5b7d794b3d35e0fd840491a8ddbedf8c66
   languageName: node
   linkType: hard
 

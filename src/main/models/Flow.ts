@@ -2,7 +2,7 @@ import {FlowNode} from './FlowNode';
 import { FlowMetadata } from './FlowMetadata';
 import {FlowElement} from './FlowElement';
 import {FlowVariable} from './FlowVariable';
-import * as p from 'path';
+import p from "path-browserify";
 
 export class Flow {
 
