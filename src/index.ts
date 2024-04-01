@@ -19,13 +19,9 @@ export function getRules(ruleNames?: string[]): IRuleDefinition[] {
 
 export function scan(flows: Flow[], ruleOptions?: IRulesConfig): ScanResult[] {
 
-  const ruleMap = new Map<string, {}>();
   let scanResults: ScanResult[];
   if (ruleOptions?.rules && Object.entries(ruleOptions.rules).length > 0) {
-    for (const [ruleName, rule] of Object.entries(ruleOptions.rules)) {
-      ruleMap.set(ruleName, rule);
-    }
-    scanResults = ScanFlows(flows, ruleMap);
+    scanResults = ScanFlows(flows, ruleOptions);
   } else {
     scanResults = ScanFlows(flows);
   }
