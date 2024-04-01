@@ -52,8 +52,20 @@ export function scan(flows: Flow[], ruleOptions?: IRulesConfig): ScanResult[] {
   return scanResults;
 }
 
-export function fix(flows: Flow[]): ScanResult[] {
-  return FixFlows(flows);
+export function fix(results : ScanResult[]): ScanResult[] {
+  
+  let newResults = [];
+  for (let result of results){
+    let flow = result.flow;
+    let ruleResults = result.ruleResults;
+    let ruleNames = ruleResults.filter((r) => r.occurs).map((r) => r.ruleName);
+    if(ruleNames.includes('UnusedVariable') || ruleNames.includes('UnconnectedElement')){
+      result.flow = FixFlows(flow, ruleResults);
+      newResults.push(result);
+    }
+  }
+
+  return newResults
 }
 
 
