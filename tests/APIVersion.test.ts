@@ -54,7 +54,7 @@ describe('APIVersion', () => {
 
     flow = new core.Flow({
       path: './testfiles/api58test.flow-meta.xml',
-      xmldata: Hidenav,
+      xmldata: Api58,
     });
     
     const ruleConfig = {
