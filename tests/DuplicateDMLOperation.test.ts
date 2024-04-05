@@ -7,7 +7,7 @@ import createANewAccount from './testfiles/CreateANewAccount.json';
 import UnconnectedScreensWithDuplicateDML from './testfiles/UnconnectedScreensWithDuplicateDML.json';
 import CreateANewAccountImproved from './testfiles/CreateANewAccountImproved.json';
 
-describe('The DuplicateDMLOperation Rule ', () => {
+describe('DuplicateDMLOperation  ', () => {
   let flow: core.Flow;
 
   it('should have 1 result in a flow with a DML statement inbetween screens ', () => {
