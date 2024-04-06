@@ -4,7 +4,7 @@ import * as core from '../src';
 import dmlstatementsinaloop from './testfiles/DMLStatementInALoop_Demo.json';
 import dmlstatementsinaloopfixed from './testfiles/DMLStatementInALoop_Demo_Fixed.json';
 
-describe('In the DMLStatementInALoop_Demo flow', () => {
+describe('DMLStatementInLoop ', () => {
   let flow: core.Flow;
   
   it('there should be one result for the rule DMLStatementInLoop', ()                                                                            => {
