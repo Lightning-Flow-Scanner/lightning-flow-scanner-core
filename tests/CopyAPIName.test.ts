@@ -4,7 +4,7 @@ import * as core from '../src';
 import CreateANewAccountWithChild from './testfiles/CreateANewAccountWithChild.json';
 import CreateANewAccountWithCopy from './testfiles/CreateANewAccountWithCopy.json';
 
-describe('In a normal flow without copied elements', () => {
+describe('CopyAPIName ', () => {
   let flow: core.Flow;
 
   it('CopyAPIName should have no result', () => {
