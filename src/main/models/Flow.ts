@@ -9,7 +9,6 @@ export class Flow {
   public label: string;
   public xmldata;
   public name?: string;
-  public path?: string;
   public interviewLabel?: string;
   public processType?;
   public processMetadataValues?;
@@ -17,7 +16,7 @@ export class Flow {
   public start?;
   public startElementReference?;
   public status?;
-  public uri?;
+  public fsPath;
   public root?;
   public elements?: FlowElement[];
   public startReference;
@@ -70,15 +69,9 @@ export class Flow {
     'waits'
   ];
 
-  constructor(args) {
-    this.uri = args.uri;
-    if (args.uri) {
-      this.path = args.uri.fsPath;
-    }
-    if (args.path) {
-      this.path = args.path;
-    }
-    let flowName = p.basename(p.basename(this.path), p.extname(this.path));
+  constructor(args :{path: string, xmldata: any}) {
+    this.fsPath = p.resolve(args.path);
+    let flowName = p.basename(p.basename(this.fsPath), p.extname(this.fsPath));
     if (flowName.includes('.')) {
       flowName = flowName.split('.')[0]
     }

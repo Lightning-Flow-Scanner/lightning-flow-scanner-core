@@ -28,7 +28,7 @@ export function FixFlows(flow: core.Flow, ruleResults: core.RuleResult[]): core.
   );
   let xmldata = BuildFlow(nodesToBuild);
   const newFlow = new core.Flow({
-    'uri': flow.uri,
+    'path': flow.fsPath,
     'xmldata': xmldata
   });
   return newFlow;
