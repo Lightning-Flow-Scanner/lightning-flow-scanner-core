@@ -23,6 +23,8 @@ export function FixFlows(flow: core.Flow, ruleResults: core.RuleResult[]): core.
         break;
       case 'metadata':
         return node;
+      case 'resource':
+        return node;
     }
   }
   );

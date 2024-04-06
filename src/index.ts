@@ -90,6 +90,7 @@ export { Flow } from './main/models/Flow';
 export { FlowAttribute } from './main/models/FlowAttribute';
 export { FlowElement } from './main/models/FlowElement';
 export { FlowNode } from './main/models/FlowNode';
+export { FlowResource } from './main/models/FlowResource';
 export { FlowType } from './main/models/FlowType';
 export { FlowVariable } from './main/models/FlowVariable';
 export { Compiler } from './main/libs/Compiler';

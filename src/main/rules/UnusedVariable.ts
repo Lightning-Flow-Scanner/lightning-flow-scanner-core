@@ -22,17 +22,19 @@ export class UnusedVariable extends RuleCommon implements core.IRuleDefinition {
     for (const variable of flow.elements.filter(node => node instanceof core.FlowVariable) as core.FlowVariable[]) {
       const variableName = variable.name;
       if ([...JSON.stringify(flow.elements.filter(node => node instanceof core.FlowNode)).matchAll(new RegExp(variableName, 'gi'))].map(a => a.index).length === 0) {
-        
-        
-        
         // if not found in any inside of flow elements
-        // gets indexes where name occurs in the variable itself and where name occurs in all variables
-        const insideCounter = [...JSON.stringify(variable).matchAll(new RegExp(variable.name, 'gi'))].map(a => a.index);
-        const variableUsage = [...JSON.stringify(flow.elements.filter(node => node instanceof core.FlowVariable)).matchAll(new RegExp(variableName, 'gi'))].map(a => a.index);
-        // when this is the same, variable must be unused.
-        if (variableUsage.length === insideCounter.length) {
-          unusedVariables.push(variable);
+
+        if([...JSON.stringify(flow.elements.filter(node => node instanceof core.FlowResource)).matchAll(new RegExp(variableName, 'gi'))].map(a => a.index).length === 0){
+          const insideCounter = [...JSON.stringify(variable).matchAll(new RegExp(variable.name, 'gi'))].map(a => a.index);
+          const variableUsage = [...JSON.stringify(flow.elements.filter(node => node instanceof core.FlowVariable)).matchAll(new RegExp(variableName, 'gi'))].map(a => a.index);
+          // finally also checks indexes where name occurs in the variable itself and where name occurs in all variables
+          // when this is the same, variable must be unused.
+          if (variableUsage.length === insideCounter.length) {
+            unusedVariables.push(variable);
+          }
         }
+
+        
       }
     }
     let results = [];

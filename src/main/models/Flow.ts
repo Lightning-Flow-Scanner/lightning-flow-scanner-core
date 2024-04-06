@@ -3,6 +3,7 @@ import { FlowMetadata } from './FlowMetadata';
 import {FlowElement} from './FlowElement';
 import {FlowVariable} from './FlowVariable';
 import p from "path-browserify";
+import { FlowResource } from './FlowResource';
 
 export class Flow {
 
@@ -28,6 +29,7 @@ export class Flow {
     'formulas',
     'variables'
   ];
+  private flowResources = ['textTemplates', 'stages'];
   private flowMetadata = [
     'description',
     'apiVersion',
@@ -36,8 +38,6 @@ export class Flow {
     'interviewLabel',
     'label',
     'status',
-    'stages',
-    'textTemplates',
     'runInMode',
     'startElementReference',
     'isTemplate',
@@ -119,6 +119,12 @@ export class Flow {
         for (const node of nodesOfType) {
           allNodes.push(
             new FlowNode(node.name, nodeType, node)
+          );
+        }
+      } else if (this.flowResources.includes(nodeType)) {
+        for (const node of nodesOfType) {
+          allNodes.push(
+            new FlowResource(node.name, nodeType, node)
           );
         }
       }
