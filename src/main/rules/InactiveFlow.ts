@@ -11,7 +11,7 @@ export class InactiveFlow extends RuleCommon implements core.IRuleDefinition {
       description: 'Avoid having inactive flows in your org.',
       supportedTypes: core.FlowType.allTypes(),
       docRefs: [],
-      isConfigurable: false, 
+      isConfigurable: true, 
       autoFixable: false
     },
     );
