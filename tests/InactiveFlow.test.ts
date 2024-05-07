@@ -19,7 +19,7 @@ describe('In the ObsoleteFlow flow', () => {
       });
   });
 
-  it('there should be one result for the rule InactiveFlow', ()                                                                            => {
+  it('there should be one result for the rule InactiveFlow', () => {
 
     const results: core.ScanResult[] = core.scan([obsoleteflow]);
     const occurringResults = results[0].ruleResults.filter((rule) => rule.occurs);
@@ -27,7 +27,7 @@ describe('In the ObsoleteFlow flow', () => {
     expect(occurringResults[0].ruleName).to.equal("InactiveFlow");
   });
 
-  it('there should be no results for an active flow', ()                                                                            => {
+  it('there should be no results for an active flow', () => {
 
     const results: core.ScanResult[] = core.scan([activeflow]);
     const occurringResults = results[0].ruleResults.filter((rule) => rule.occurs);
