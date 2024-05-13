@@ -1,6 +1,6 @@
 import { assert, expect } from 'chai';
 import 'mocha';
-import * as core from '../src'
+import * as core from '../src';
 import * as path from 'path-browserify';
 
 describe('APIVersion', () => {
