@@ -6,7 +6,7 @@ export class FlowElementConnector{
     public alias:string;
     public reference:string;
     public childName:string;
-    public childOf:string;
+    public childOf:boolean;
 
     constructor(type:string, element:object, args){
         this.type = type;
