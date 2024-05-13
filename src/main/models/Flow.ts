@@ -68,19 +68,19 @@ export class Flow {
     "waits",
   ];
 
-  constructor(args: { path: string; xmldata: any }) {
-    this.fsPath = p.resolve(args.path);
+  constructor(path: string, data?: any) {
+    this.fsPath = p.resolve(path);
     let flowName = p.basename(p.basename(this.fsPath), p.extname(this.fsPath));
     if (flowName.includes(".")) {
       flowName = flowName.split(".")[0];
     }
     this.name = flowName;
-    if (args.xmldata && args.xmldata.Flow) {
-      this.xmldata = args.xmldata.Flow;
-    } else if (args.xmldata) {
-      this.xmldata = args.xmldata;
+    if(data){
+      if (data.Flow) {
+        this.xmldata = data.Flow;
+      } else this.xmldata = data;
+      this.preProcessNodes();
     }
-    this.preProcessNodes();
   }
 
   public preProcessNodes() {
@@ -104,8 +104,10 @@ export class Flow {
           for (const node of data) {
             allNodes.push(new FlowMetadata(nodeType, data[node]));
           }
+          for (const node of data) {
+          }
         } else {
-          allNodes.push(new FlowMetadata(nodeType, this.xmldata[nodeType]));
+          allNodes.push(new FlowMetadata(nodeType, data));
         }
       } else if (this.flowVariables.includes(nodeType)) {
         if (Array.isArray(data)) {
