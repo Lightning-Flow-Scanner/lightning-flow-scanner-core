@@ -3,7 +3,7 @@ import 'mocha';
 import * as core from '../src'
 import * as path from 'path-browserify';
 
-describe('In the unconnected element flow', () => {
+describe('UnconnectedElement', () => {
   let example_uri = path.join(__dirname, './xmlfiles/Unconnected_Element.flow-meta.xml');
 
 

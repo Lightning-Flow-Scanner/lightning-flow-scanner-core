@@ -3,7 +3,7 @@ import 'mocha';
 import * as core from '../src';
 import * as path from 'path-browserify';
 
-describe('In the Hardcoded_Ids flow', () => {
+describe('HardcodedId', () => {
   let example_uri = path.join(__dirname, './xmlfiles/Hardcoded_Id.flow-meta.xml');
 
   it('there should be one result for the rule HardcodedIds', async ()                                                                            => {
