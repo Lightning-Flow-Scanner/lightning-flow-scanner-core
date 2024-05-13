@@ -104,13 +104,13 @@ Follow these steps to set up your development environment:
 
     ```bash
     cd lightning-flow-scanner-core
-    yarn install
+    npm install
     ```
 
 3. **Build**: Compile the TypeScript source files into JavaScript using the TypeScript compiler:
 
     ```bash
-    yarn build
+    npm run build
     ```
 
     This command generates the compiled JavaScript files in the `out` directory.
@@ -118,7 +118,7 @@ Follow these steps to set up your development environment:
 4. **Run Tests**: Ensure the module functions correctly by running the test suites:
 
     ```bash
-    yarn test
+    npm run test
     ```
 
     This command uses Mocha to run tests located in the `tests` directory and provides feedback on the module's functionality.

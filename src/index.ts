@@ -2,6 +2,7 @@ import {IRuleDefinition} from './main/interfaces/IRuleDefinition';
 import { IRulesConfig } from './main/interfaces/IRulesConfig';
 import { FixFlows } from './main/libs/FixFlows';
 import { GetRuleDefinitions } from './main/libs/GetRuleDefinitions';
+import { ParseFlows } from './main/libs/ParseFlows';
 import { ScanFlows } from './main/libs/ScanFlows';
 import {Flow} from './main/models/Flow';
 import {ResultDetails} from './main/models/ResultDetails';
@@ -15,6 +16,10 @@ export function getRules(ruleNames?: string[]): IRuleDefinition[] {
   } else {
     return GetRuleDefinitions();
   }
+}
+
+export function parse(selectedUris: any): Promise<Flow[]> {
+  return ParseFlows(selectedUris);
 }
 
 export function scan(flows: Flow[], ruleOptions?: IRulesConfig): ScanResult[] {

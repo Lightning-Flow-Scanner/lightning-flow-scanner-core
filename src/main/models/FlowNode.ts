@@ -10,13 +10,13 @@ export class FlowNode extends FlowElement {
 
     constructor(name: string, subtype: string, element: object) {
         super('node', subtype, element);
-        this.name = (subtype === 'start' ? 'flowstart' : name[0]);
+        this.name = (subtype === 'start' ? 'flowstart' : name);
         const connectors = this.getConnectors(subtype, element);
-        if (connectors.length > 0 && connectors[0] !== undefined) {
+        if (connectors !== undefined && connectors.length > 0) {
             this.connectors = connectors;
         }
-        this.locationX = element["locationX"][0];
-        this.locationY = element["locationY"][0];
+        this.locationX = element["locationX"];
+        this.locationY = element["locationY"];
     }
 
     private getConnectors(subtype, element) {
@@ -31,7 +31,7 @@ export class FlowNode extends FlowElement {
                     if (asyncElement.connector) {
                         connectors.push(
                             new FlowElementConnector('connector', asyncElement.connector, {
-                                childName: asyncElement?.name?.[0] ?? 'AsyncAfterCommit',
+                                childName: asyncElement?.name ?? 'AsyncAfterCommit',
                                 childOf: 'rules'
                             })
                         )
@@ -48,7 +48,7 @@ export class FlowNode extends FlowElement {
                 if (rule.connector) {
                     connectors.push(
                         new FlowElementConnector('connector', rule.connector, {
-                            childName: rule.name[0],
+                            childName: rule.name,
                             childOf: 'rules'
                         })
                     );
@@ -95,7 +95,7 @@ export class FlowNode extends FlowElement {
                 if (waitEvent.connector) {
                     connectors.push(
                         new FlowElementConnector('connector', waitEvent.connector, {
-                            childName: waitEvent.name[0],
+                            childName: waitEvent.name,
                             childOf: 'rules'
                         })
                     );

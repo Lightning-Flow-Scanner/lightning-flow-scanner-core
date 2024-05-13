@@ -46,7 +46,7 @@ export class Flow {
     'isAdditionalPermissionRequiredToRun',
     'migratedFromWorkflowRuleName',
     'triggerOrder',
-    'Environments',
+    'environments',
     'segment'
   ];
   private flowNodes = [
@@ -76,6 +76,8 @@ export class Flow {
       flowName = flowName.split('.')[0]
     }
     this.name = flowName;
+
+    // todo fix
     if(args.xmldata && args.xmldata.Flow){
       this.xmldata = args.xmldata.Flow;
     } else if(args.xmldata){
@@ -96,36 +98,48 @@ export class Flow {
     this.type = this.xmldata.processType;
     const allNodes: (FlowVariable | FlowNode | FlowMetadata)[] = [];
     for (const nodeType in this.xmldata) {
-      const nodesOfType = this.xmldata[nodeType];
       // skip xmlns url
-      if (nodeType == '$') {
-        this.root = nodesOfType;
-        continue;
-      }
+      // if (nodeType == "@xmlns") {
+      //   continue;
+      // }
       if (this.flowMetadata.includes(nodeType)) {
-        for (const node of nodesOfType) {
+        let data = this.xmldata[nodeType];
+        if (Array.isArray(data)) {
+          for (const node of data) {
+            allNodes.push(new FlowMetadata(nodeType, data[node]));
+          }
+        } else {
           allNodes.push(new FlowMetadata(
             nodeType,
-            node
+            this.xmldata[nodeType]
           ));
         }
       } else if (this.flowVariables.includes(nodeType)) {
-        for (const node of nodesOfType) {
-          allNodes.push(
-            new FlowVariable(node.name, nodeType, node)
-          );
+        let data = this.xmldata[nodeType];
+        if (Array.isArray(data)) {
+          for (const node of data) {
+            allNodes.push(new FlowVariable(data[node].name, nodeType, data[node]));
+          }
+        } else {
+          allNodes.push(new FlowVariable(data.name, nodeType, data));
         }
       } else if (this.flowNodes.includes(nodeType)) {
-        for (const node of nodesOfType) {
-          allNodes.push(
-            new FlowNode(node.name, nodeType, node)
-          );
+        let data = this.xmldata[nodeType];
+        if (Array.isArray(data)) {
+          for (const node of data) {
+            allNodes.push(new FlowNode(data[node].name, nodeType, data[node]));
+          }
+        } else {
+          allNodes.push(new FlowNode(data.name, nodeType, data));
         }
       } else if (this.flowResources.includes(nodeType)) {
-        for (const node of nodesOfType) {
-          allNodes.push(
-            new FlowResource(node.name, nodeType, node)
-          );
+        let data = this.xmldata[nodeType];
+        if (Array.isArray(data)) {
+          for (const node of data) {
+            allNodes.push(new FlowResource(data[node].name, nodeType, data[node]));
+          }
+        } else {
+          allNodes.push(new FlowResource(data.name, nodeType, data));
         }
       }
     }
@@ -137,14 +151,14 @@ export class Flow {
     let start = '';
     const flowElements: FlowNode[] = this.elements.filter(node => node instanceof FlowNode) as FlowNode[];
     if (this.startElementReference) {
-      start = this.startElementReference[0];
+      start = this.startElementReference;
     } else if(flowElements.find(n => {
       return n.subtype === 'start';
     })){
       let startElement = flowElements.find(n => {
         return n.subtype === 'start';
       });
-      start = startElement.connectors[0].reference;
+      start = startElement.connectors['reference'];
     }
     return start;
   }
