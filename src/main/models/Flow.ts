@@ -102,7 +102,7 @@ export class Flow {
       if (this.flowMetadata.includes(nodeType)) {
         if (Array.isArray(data)) {
           for (const node of data) {
-            allNodes.push(new FlowMetadata(nodeType, data[node]));
+            allNodes.push(new FlowMetadata(nodeType, node));
           }
           for (const node of data) {
           }
@@ -113,7 +113,7 @@ export class Flow {
         if (Array.isArray(data)) {
           for (const node of data) {
             allNodes.push(
-              new FlowVariable(data[node].name, nodeType, data[node])
+              new FlowVariable(node.name, nodeType, node)
             );
           }
         } else {
@@ -131,7 +131,7 @@ export class Flow {
         if (Array.isArray(data)) {
           for (const node of data) {
             allNodes.push(
-              new FlowResource(data[node].name, nodeType, data[node])
+              new FlowResource(node.name, nodeType, node)
             );
           }
         } else {
