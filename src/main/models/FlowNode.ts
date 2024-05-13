@@ -8,13 +8,12 @@ export class FlowNode extends FlowElement {
     public locationX: string;
     public locationY: string;
 
-    constructor(name: string, subtype: string, element: object) {
+    constructor(provName: string, subtype: string, element: object) {
         super('node', subtype, element);
-        this.name = (subtype === 'start' ? 'flowstart' : name);
+        let nodeName = subtype === 'start' ? 'flowstart' : provName;
+        this.name = nodeName;
         const connectors = this.getConnectors(subtype, element);
-        if (connectors !== undefined && connectors.length > 0) {
-            this.connectors = connectors;
-        }
+        this.connectors = connectors;
         this.locationX = element["locationX"];
         this.locationY = element["locationY"];
     }
@@ -56,20 +55,24 @@ export class FlowNode extends FlowElement {
             }
             return connectors;
         } else if (subtype === 'assignments') {
-            return [new FlowElementConnector('connector', element.connector, {})];
+            return element.connector ? [new FlowElementConnector('connector', element.connector, {})] : [];
         } else if (subtype === 'loops') {
-            return [
-                new FlowElementConnector(
+            const connectors = [];
+            if(element.nextValueConnector){
+                connectors.push(new FlowElementConnector(
                     'nextValueConnector',
                     element.nextValueConnector,
                     {}
-                ),
-                new FlowElementConnector(
+                ))
+            }
+            if(element.noMoreValuesConnector){
+                connectors.push(new FlowElementConnector(
                     'noMoreValuesConnector',
                     element.noMoreValuesConnector,
                     {}
-                )
-            ];
+                ))
+            }
+            return connectors;
         } else if (subtype === 'actionCalls') {
             const connectors = [];
             if (element.connector) {
@@ -139,11 +142,11 @@ export class FlowNode extends FlowElement {
             }
             return connectors;
         } else if (subtype === 'subflows') {
-            return [new FlowElementConnector('connector', element.connector, {})];
+            return element.connector ? [new FlowElementConnector('connector', element.connector, {})] : [];
         } else if (subtype === 'screens') {
-            return [new FlowElementConnector('connector', element.connector, {})];
+            return element.connector ? [new FlowElementConnector('connector', element.connector, {})] : [];
         } else {
-            return [new FlowElementConnector('connector', element.connector, {})];
+            return element.connector ? [new FlowElementConnector('connector', element.connector, {})] : [];
         }
     }
 }

@@ -8,7 +8,8 @@ export async function ParseFlows(selectedUris: string[]) {
   let parsedFlows: Flow[] = [];
   for (let uri of selectedUris) {
     try {
-      let content = await fs.readFileSync(p.normalize(uri));
+      let normalizedURI = p.normalize(uri);
+      let content = await fs.readFileSync(normalizedURI);
       let xmlString = content.toString();
       const flowObj = convert(xmlString, { format: 'object' });
       parsedFlows.push(new Flow(
