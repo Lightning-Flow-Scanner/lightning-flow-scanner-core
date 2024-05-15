@@ -30,7 +30,7 @@ export function FixFlows(flow: core.Flow, ruleResults: core.RuleResult[]): core.
   );
   let xmldata = BuildFlow(nodesToBuild);
   const newFlow = new core.Flow(
-    flow.fsPath, xmldata
+    flow.name, xmldata
   );
   return newFlow;
 }

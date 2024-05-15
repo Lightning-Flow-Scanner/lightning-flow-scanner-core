@@ -2,13 +2,12 @@ import { FlowNode } from "./FlowNode";
 import { FlowMetadata } from "./FlowMetadata";
 import { FlowElement } from "./FlowElement";
 import { FlowVariable } from "./FlowVariable";
-import p from "path-browserify";
 import { FlowResource } from "./FlowResource";
 
 export class Flow {
   public label: string;
   public xmldata;
-  public name?: string;
+  public name: string;
   public interviewLabel?: string;
   public processType?;
   public processMetadataValues?;
@@ -16,8 +15,6 @@ export class Flow {
   public start?;
   public startElementReference?;
   public status?;
-  public fsPath;
-  public root?;
   public elements?: FlowElement[];
   public startReference;
 
@@ -68,12 +65,7 @@ export class Flow {
     "waits",
   ];
 
-  constructor(path: string, data?: any) {
-    this.fsPath = p.resolve(path);
-    let flowName = p.basename(p.basename(this.fsPath), p.extname(this.fsPath));
-    if (flowName.includes(".")) {
-      flowName = flowName.split(".")[0];
-    }
+  constructor(flowName: string, data?: any) {  
     this.name = flowName;
     if(data){
       if (data.Flow) {
