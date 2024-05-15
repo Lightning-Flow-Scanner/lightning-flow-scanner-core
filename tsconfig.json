@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es2020",  // Change this line
     "target": "es6",
-    "resolveJsonModule": true,
+    "moduleResolution": "node",
     "outDir": "out",
     "lib": [
-      "es2020.string",
+      "es2020.string",  // You might want to update this to include es2020 as well
       "es6"
     ],
     "experimentalDecorators": true,
     "sourceMap": true,
     "rootDir": "src",
-    "strict": false, /* enable all strict type-checking options */
+    "strict": false,
     "baseUrl": ".",
     "declaration": true,
     "esModuleInterop": true
