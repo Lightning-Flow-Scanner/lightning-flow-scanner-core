@@ -25,7 +25,6 @@
   "packageManager": "yarn@4.1.1",
   "dependencies": {
     "@types/path-browserify": "^1.0.2",
-    "path-browserify": "^1.0.1",
     "xmlbuilder2": "^3.1.1"
   }
 }
