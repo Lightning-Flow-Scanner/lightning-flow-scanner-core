@@ -17,6 +17,8 @@ export class Flow {
   public status?;
   public elements?: FlowElement[];
   public startReference;
+  public description;
+  public apiVersion;
 
   private flowVariables = [
     "choices",
@@ -83,7 +85,9 @@ export class Flow {
     this.startElementReference = this.xmldata.startElementReference;
     this.start = this.xmldata.start;
     this.status = this.xmldata.status;
-    this.type = this.xmldata.processType;
+    this.description = this.xmldata.description;
+    this.apiVersion = this.xmldata.apiVersion;
+
     const allNodes: (FlowVariable | FlowNode | FlowMetadata)[] = [];
     for (const nodeType in this.xmldata) {
       // skip xmlns url

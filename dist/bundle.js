@@ -331,7 +331,8 @@
             this.startElementReference = this.xmldata.startElementReference;
             this.start = this.xmldata.start;
             this.status = this.xmldata.status;
-            this.type = this.xmldata.processType;
+            this.description = this.xmldata.description;
+            this.apiVersion = this.xmldata.apiVersion;
             const allNodes = [];
             for (const nodeType in this.xmldata) {
                 // skip xmlns url
@@ -1142,7 +1143,7 @@
             const ruleResults = [];
             for (const rule of selectedRules) {
                 try {
-                    if (rule.supportedTypes.includes(flow.type)) {
+                    if (rule.supportedTypes.includes(flow.processType)) {
                         let config = undefined;
                         if (ruleOptions &&
                             ruleOptions["rules"] &&
