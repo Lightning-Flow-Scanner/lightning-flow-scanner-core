@@ -22,7 +22,7 @@ export function ScanFlows(
     const ruleResults: core.RuleResult[] = [];
     for (const rule of selectedRules) {
       try {
-        if (rule.supportedTypes.includes(flow.type)) {
+        if (rule.supportedTypes.includes(flow.processType)) {
           let config = undefined;
           if (
             ruleOptions &&
