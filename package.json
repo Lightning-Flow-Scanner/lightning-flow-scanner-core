@@ -49,7 +49,7 @@
     "tslib": "^2.7.0",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.2.0",
-    "uglify-js": "^3.19.2"
+    "uglify-js": "^3.19.3"
   },
   "dependencies": {
     "@types/path-browserify": "^1.0.3",
