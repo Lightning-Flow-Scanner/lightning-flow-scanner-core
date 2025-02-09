@@ -32,7 +32,7 @@ export class FlowType {
     "LoyaltyManagementFlow",
   ];
 
-  public static allTypes = function () {
+  public static allTypes = () => {
     return [...this.backEndTypes, ...this.visualTypes, ...this.surveyTypes];
   };
 }

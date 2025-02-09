@@ -1,11 +1,18 @@
 import { FlowNode } from "./FlowNode";
-import { FlowMetadata } from "./FlowMetadata";
 import { FlowElement } from "./FlowElement";
-import { FlowVariable } from "./FlowVariable";
+import { TreeNode, HashTreeNode } from "./TreeNode";
+
+import { extractNodes } from "../libs/ExtractNodes";
+
 import * as p from "path";
-import { FlowResource } from "./FlowResource";
 import { XMLSerializedAsObject } from "xmlbuilder2/lib/interfaces";
 import { create } from "xmlbuilder2";
+import { FlowElementConnector } from "./FlowElementConnector";
+import process from "process";
+
+type CommonConnector = {
+  connectors: FlowElementConnector[];
+};
 
 export class Flow {
   public label: string;
@@ -24,46 +31,7 @@ export class Flow {
   public startReference;
   public triggerOrder?: number;
 
-  private flowVariables = ["choices", "constants", "dynamicChoiceSets", "formulas", "variables"];
-  private flowResources = ["textTemplates", "stages"];
-  private flowMetadata = [
-    "description",
-    "apiVersion",
-    "processMetadataValues",
-    "processType",
-    "interviewLabel",
-    "label",
-    "status",
-    "runInMode",
-    "startElementReference",
-    "isTemplate",
-    "fullName",
-    "timeZoneSidKey",
-    "isAdditionalPermissionRequiredToRun",
-    "migratedFromWorkflowRuleName",
-    "triggerOrder",
-    "environments",
-    "segment",
-  ];
-  private flowNodes = [
-    "actionCalls",
-    "apexPluginCalls",
-    "assignments",
-    "collectionProcessors",
-    "decisions",
-    "loops",
-    "orchestratedStages",
-    "recordCreates",
-    "recordDeletes",
-    "recordLookups",
-    "recordUpdates",
-    "recordRollbacks",
-    "screens",
-    "start",
-    "steps",
-    "subflows",
-    "waits",
-  ];
+  private flowElementConnection: HashTreeNode<FlowElement> = { start: {} };
 
   constructor(path?: string, data?: unknown);
   constructor(path: string, data?: unknown) {
@@ -84,7 +52,7 @@ export class Flow {
     }
   }
 
-  public preProcessNodes() {
+  private preProcessNodes() {
     this.label = this.xmldata.label;
     this.interviewLabel = this.xmldata.interviewLabel;
     this.processType = this.xmldata.processType;
@@ -94,48 +62,7 @@ export class Flow {
     this.status = this.xmldata.status;
     this.type = this.xmldata.processType;
     this.triggerOrder = this.xmldata.triggerOrder;
-    const allNodes: (FlowVariable | FlowNode | FlowMetadata)[] = [];
-    for (const nodeType in this.xmldata) {
-      // skip xmlns url
-      // if (nodeType == "@xmlns") {
-      //   continue;
-      // }
-      const data = this.xmldata[nodeType];
-      if (this.flowMetadata.includes(nodeType)) {
-        if (Array.isArray(data)) {
-          for (const node of data) {
-            allNodes.push(new FlowMetadata(nodeType, node));
-          }
-        } else {
-          allNodes.push(new FlowMetadata(nodeType, data));
-        }
-      } else if (this.flowVariables.includes(nodeType)) {
-        if (Array.isArray(data)) {
-          for (const node of data) {
-            allNodes.push(new FlowVariable(node.name, nodeType, node));
-          }
-        } else {
-          allNodes.push(new FlowVariable(data.name, nodeType, data));
-        }
-      } else if (this.flowNodes.includes(nodeType)) {
-        if (Array.isArray(data)) {
-          for (const node of data) {
-            allNodes.push(new FlowNode(node.name, nodeType, node));
-          }
-        } else {
-          allNodes.push(new FlowNode(data.name, nodeType, data));
-        }
-      } else if (this.flowResources.includes(nodeType)) {
-        if (Array.isArray(data)) {
-          for (const node of data) {
-            allNodes.push(new FlowResource(node.name, nodeType, node));
-          }
-        } else {
-          allNodes.push(new FlowResource(data.name, nodeType, data));
-        }
-      }
-    }
-    this.elements = allNodes;
+    this.elements = extractNodes(this);
     this.startReference = this.findStart();
   }
 
@@ -156,7 +83,35 @@ export class Flow {
       });
       start = startElement.connectors[0]["reference"];
     }
+    const startNode: Partial<FlowElement> = {
+      name: start,
+      connectors: [{ reference: start }],
+    };
+    this.patchTree("start", startNode as FlowElement);
     return start;
+  }
+
+  public patchTree(key: string, elem: FlowElement): void {
+    const { COLLECT_CHILDREN: collectChildren } = process.env;
+    if (!collectChildren) {
+      return;
+    }
+    const children: Partial<TreeNode<FlowElement>>[] = [];
+    const connectorElement = elem as CommonConnector;
+    if (connectorElement.connectors) {
+      for (const connector of connectorElement.connectors) {
+        if (children.find((child) => child?.value?.name === connector.reference)) {
+          continue;
+        }
+        children.push({
+          value: { name: connector.reference } as unknown as FlowElement,
+        });
+      }
+    }
+    this.flowElementConnection[key] = {
+      value: elem,
+      children: children as TreeNode<FlowElement>[],
+    };
   }
 
   public toXMLString(): string {

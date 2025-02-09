@@ -196,6 +196,7 @@ const config: Config = {
           keepClassNames: true,
           baseUrl: ".",
         },
+        minify: false,
       },
     ],
   },
