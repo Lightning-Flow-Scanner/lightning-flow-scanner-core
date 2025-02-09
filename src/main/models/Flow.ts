@@ -8,6 +8,7 @@ import * as p from "path";
 import { XMLSerializedAsObject } from "xmlbuilder2/lib/interfaces";
 import { create } from "xmlbuilder2";
 import { FlowElementConnector } from "./FlowElementConnector";
+import process from "process";
 
 type CommonConnector = {
   connectors: FlowElementConnector[];
@@ -91,6 +92,10 @@ export class Flow {
   }
 
   public patchTree(key: string, elem: FlowElement): void {
+    const { COLLECT_CHILDREN: collectChildren } = process.env;
+    if (!collectChildren) {
+      return;
+    }
     const children: Partial<TreeNode<FlowElement>>[] = [];
     const connectorElement = elem as CommonConnector;
     if (connectorElement.connectors) {
