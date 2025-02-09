@@ -82,10 +82,11 @@ export class Flow {
       });
       start = startElement.connectors[0]["reference"];
     }
-    this.patchTree("start", {
+    const startNode: Partial<FlowElement> = {
       name: start,
       connectors: [{ reference: start }],
-    } as unknown as FlowElement);
+    };
+    this.patchTree("start", startNode as FlowElement);
     return start;
   }
 
