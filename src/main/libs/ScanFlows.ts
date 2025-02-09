@@ -4,7 +4,7 @@ import { ParsedFlow } from "../models/ParsedFlow";
 
 export function scan(
   parsedFlows: ParsedFlow[],
-  ruleOptions?: core.IRulesConfig
+  ruleOptions?: Partial<core.IRulesConfig>
 ): core.ScanResult[] {
   const flows: core.Flow[] = [];
   for (const flow of parsedFlows) {

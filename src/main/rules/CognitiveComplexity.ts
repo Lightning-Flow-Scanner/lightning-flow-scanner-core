@@ -1,5 +1,14 @@
-import { Flow, IRuleDefinition, RuleResult, FlowType } from "../internals/internals";
+import {
+  Flow,
+  IRuleDefinition,
+  RuleResult,
+  FlowType,
+  ResultDetails,
+  FlowAttribute,
+} from "../internals/internals";
 import { RuleCommon } from "../models/RuleCommon";
+
+import { toTreeStackPath } from "../models/TreeNode";
 
 export class CognitiveComplexity extends RuleCommon implements IRuleDefinition {
   constructor() {
@@ -14,10 +23,24 @@ export class CognitiveComplexity extends RuleCommon implements IRuleDefinition {
         `,
       supportedTypes: [...FlowType.backEndTypes],
       docRefs: [],
-      isConfigurable: false,
+      isConfigurable: true,
       autoFixable: false,
     });
   }
+  private defaultMaxCognitiveCount: number = 5;
 
-  public execute(flow: Flow, ruleOptions?: object = {}): RuleResult {}
+  public execute(flow: Flow, ruleOptions?: { max: number }): RuleResult {
+    const results: ResultDetails[] = [];
+    const maxCognitiveCount: number = ruleOptions?.max ?? this.defaultMaxCognitiveCount;
+    const stackPath: string[] = toTreeStackPath(flow["flowElementConnection"]);
+    const flowCognitiveCount: number = stackPath.length;
+    if (flowCognitiveCount > maxCognitiveCount) {
+      results.push(
+        new ResultDetails(
+          new FlowAttribute(this.name, "Flow Overall Logic", "Too many decision branches")
+        )
+      );
+    }
+    return new RuleResult(this, results);
+  }
 }

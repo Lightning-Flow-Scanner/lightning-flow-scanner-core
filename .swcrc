@@ -1,6 +1,6 @@
 {
   "$schema": "https://swc.rs/schema.json",
-  "sourceMaps": false,
+  "sourceMaps":false,
   "module": {
     "type": "es6",
     "strictMode": true,

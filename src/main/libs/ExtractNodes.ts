@@ -3,6 +3,7 @@ import { FlowVariable } from "../models/FlowVariable";
 import { FlowNode } from "../models/FlowNode";
 import { FlowResource } from "../models/FlowResource";
 import { Flow } from "../models/Flow";
+import { FlowElement } from "../models/FlowElement";
 
 const flowVariables = ["choices", "constants", "dynamicChoiceSets", "formulas", "variables"];
 const flowResources = ["textTemplates", "stages"];
@@ -43,10 +44,16 @@ const flowNodes = [
   "steps",
   "subflows",
   "waits",
+  "customErrors",
 ];
 
-const extractNodes = (flow: Flow): (FlowVariable | FlowNode | FlowMetadata)[] => {
-  const allNodes: (FlowVariable | FlowNode | FlowMetadata)[] = [];
+const extractNodes = (flow: Flow): FlowElement[] => {
+  const allNodes: FlowElement[] = [];
+  allNodes.push = function (...items: FlowElement[]): number {
+    const element = items[0];
+    flow.patchTree(element.name as string, element);
+    return Array.prototype.push.apply(this, items);
+  };
   for (const nodeType in flow.xmldata) {
     const data = flow.xmldata[nodeType];
     if (flowMetadata.includes(nodeType)) {

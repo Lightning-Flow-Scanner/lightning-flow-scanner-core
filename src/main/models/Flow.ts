@@ -1,11 +1,17 @@
 import { FlowNode } from "./FlowNode";
 import { FlowElement } from "./FlowElement";
+import { TreeNode, HashTreeNode } from "./TreeNode";
 
 import { extractNodes } from "../libs/ExtractNodes";
 
 import * as p from "path";
 import { XMLSerializedAsObject } from "xmlbuilder2/lib/interfaces";
 import { create } from "xmlbuilder2";
+import { FlowElementConnector } from "./FlowElementConnector";
+
+type CommonConnector = {
+  connectors: FlowElementConnector[];
+};
 
 export class Flow {
   public label: string;
@@ -23,6 +29,8 @@ export class Flow {
   public elements?: FlowElement[];
   public startReference;
   public triggerOrder?: number;
+
+  private flowElementConnection: HashTreeNode<FlowElement> = { start: {} };
 
   constructor(path?: string, data?: unknown);
   constructor(path: string, data?: unknown) {
@@ -74,7 +82,30 @@ export class Flow {
       });
       start = startElement.connectors[0]["reference"];
     }
+    this.patchTree("start", {
+      name: start,
+      connectors: [{ reference: start }],
+    } as unknown as FlowElement);
     return start;
+  }
+
+  public patchTree(key: string, elem: FlowElement): void {
+    const children: Partial<TreeNode<FlowElement>>[] = [];
+    const connectorElement = elem as CommonConnector;
+    if (connectorElement.connectors) {
+      for (const connector of connectorElement.connectors) {
+        if (children.find((child) => child?.value?.name === connector.reference)) {
+          continue;
+        }
+        children.push({
+          value: { name: connector.reference } as unknown as FlowElement,
+        });
+      }
+    }
+    this.flowElementConnection[key] = {
+      value: elem,
+      children: children as TreeNode<FlowElement>[],
+    };
   }
 
   public toXMLString(): string {
