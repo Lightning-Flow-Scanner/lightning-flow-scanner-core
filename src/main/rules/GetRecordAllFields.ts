@@ -8,7 +8,7 @@ export class GetRecordAllFields extends RuleCommon implements core.IRuleDefiniti
         name: "GetRecordAllFields",
         label: "Get Record All Fields",
         description:
-          "Following the principle of least privilege (PoLP), avoid using Get Records with 'All Fields' unless necessary.",
+          "Following the principle of least privilege (PoLP), avoid using Get Records with 'Automatically store all fields' unless necessary.",
         supportedTypes: [...core.FlowType.visualTypes, ...core.FlowType.backEndTypes],
         docRefs: [
           {
