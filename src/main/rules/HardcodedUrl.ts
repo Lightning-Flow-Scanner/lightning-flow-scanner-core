@@ -5,10 +5,9 @@ import {
   Flow,
   FlowType,
   ResultDetails,
-  AutoFixable,
 } from "../internals/internals";
 
-export class HardcodedUrl extends RuleCommon implements IRuleDefinition, AutoFixable {
+export class HardcodedUrl extends RuleCommon implements IRuleDefinition {
   constructor() {
     super(
       {
@@ -53,9 +52,5 @@ export class HardcodedUrl extends RuleCommon implements IRuleDefinition, AutoFix
     }
 
     return new RuleResult(this, results);
-  }
-
-  public fix(flow: Flow): Flow {
-    return flow;
   }
 }
