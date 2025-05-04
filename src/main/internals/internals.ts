@@ -13,6 +13,7 @@ import { ResultDetails } from "../models/ResultDetails";
 import { RuleResult } from "../models/RuleResult";
 import { ScanResult } from "../models/ScanResult";
 import { RuleCommon } from "../models/RuleCommon";
+import { ParsedFlow } from "../models/ParsedFlow";
 
 export {
   FlowAttribute,
@@ -27,5 +28,6 @@ export {
   RuleResult,
   ResultDetails,
   RuleCommon,
+  ParsedFlow,
 };
 export type { IRuleDefinition, IRulesConfig, AutoFixable };

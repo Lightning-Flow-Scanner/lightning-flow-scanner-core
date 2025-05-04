@@ -36,9 +36,21 @@ export class HardcodedUrl extends RuleCommon implements IRuleDefinition, AutoFix
     );
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public execute(flow: Flow): RuleResult {
     const results: ResultDetails[] = [];
+
+    if (!flow.elements) {
+      return new RuleResult(this, results);
+    }
+
+    const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}force\.com/g;
+
+    for (const element of flow.elements) {
+      const nodeString = JSON.stringify(element);
+      if (urlRegex.test(nodeString)) {
+        results.push(new ResultDetails(element));
+      }
+    }
 
     return new RuleResult(this, results);
   }
