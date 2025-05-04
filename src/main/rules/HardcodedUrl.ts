@@ -28,7 +28,7 @@ export class HardcodedUrl extends RuleCommon implements IRuleDefinition, AutoFix
           },
         ],
         isConfigurable: false,
-        autoFixable: true,
+        autoFixable: false,
       },
       {
         severity: "warning",
