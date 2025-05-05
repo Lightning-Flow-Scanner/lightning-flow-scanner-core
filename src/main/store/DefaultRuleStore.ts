@@ -17,6 +17,8 @@ import { UnsafeRunningContext } from "../rules/UnsafeRunningContext";
 import { UnusedVariable } from "../rules/UnusedVariable";
 import { SameRecordFieldUpdates } from "../rules/SameRecordFieldUpdates";
 import { TriggerOrder } from "../rules/TriggerOrder";
+import { GetRecordAllFields } from "../rules/GetRecordAllFields";
+import { HardcodedUrl } from "../rules/HardcodedUrl";
 
 export const DefaultRuleStore: object = {
   APIVersion,
@@ -38,4 +40,9 @@ export const DefaultRuleStore: object = {
   InactiveFlow,
   UnsafeRunningContext,
   SameRecordFieldUpdates,
+};
+
+export const BetaRuleStore: object = {
+  GetRecordAllFields,
+  HardcodedUrl,
 };

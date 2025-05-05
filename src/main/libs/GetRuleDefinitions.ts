@@ -1,9 +1,8 @@
 import { IRuleDefinition } from "../interfaces/IRuleDefinition";
-import { DefaultRuleStore } from "../store/DefaultRuleStore";
+import { BetaRuleStore, DefaultRuleStore } from "../store/DefaultRuleStore";
 import { DynamicRule } from "./DynamicRule";
 import { RuleLoader } from "./RuleLoader";
 
-// TODO: Refactor to include beta, opt-in rules.
 export function GetRuleDefinitions(ruleConfig?: Map<string, unknown>): IRuleDefinition[] {
   const selectedRules: IRuleDefinition[] = [];
   if (ruleConfig && ruleConfig instanceof Map) {
@@ -34,12 +33,12 @@ export function GetRuleDefinitions(ruleConfig?: Map<string, unknown>): IRuleDefi
       }
     }
   } else {
-    for (const rule in DefaultRuleStore) {
+    const allRules = [...Object.keys(DefaultRuleStore), ...Object.keys(BetaRuleStore)];
+    for (const rule in allRules) {
       const matchedRule = new DynamicRule(rule) as IRuleDefinition;
       selectedRules.push(matchedRule);
     }
   }
-
   return selectedRules;
 }
 
