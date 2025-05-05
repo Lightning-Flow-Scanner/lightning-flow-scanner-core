@@ -21,11 +21,15 @@ export function GetRuleDefinitions(ruleConfig?: Map<string, unknown>): IRuleDefi
         }
         if (configuredPath) {
           const customRule = RuleLoader.loadCustomRule(ruleName, configuredPath) as IRuleDefinition;
-          customRule.severity = severity;
+          if (configuredSeverity) {
+            customRule.severity = severity;
+          }
           selectedRules.push(customRule);
         } else {
           const matchedRule = new DynamicRule(ruleName) as IRuleDefinition;
-          matchedRule.severity = severity;
+          if (configuredSeverity) {
+            matchedRule.severity = severity;
+          }
           selectedRules.push(matchedRule);
         }
       } catch (error) {
@@ -33,12 +37,12 @@ export function GetRuleDefinitions(ruleConfig?: Map<string, unknown>): IRuleDefi
       }
     }
   } else {
-    const allRules = [...Object.keys(DefaultRuleStore), ...Object.keys(BetaRuleStore)];
-    for (const rule in allRules) {
+    for (const rule in DefaultRuleStore) {
       const matchedRule = new DynamicRule(rule) as IRuleDefinition;
       selectedRules.push(matchedRule);
     }
   }
+
   return selectedRules;
 }
 
@@ -49,4 +53,10 @@ export function getRules(ruleNames?: string[]): IRuleDefinition[] {
   } else {
     return GetRuleDefinitions();
   }
+}
+
+export function getBetaRules(): IRuleDefinition[] {
+  return GetRuleDefinitions(
+    new Map<string, string>(Object.keys(BetaRuleStore).map((name) => [name, ""]))
+  );
 }

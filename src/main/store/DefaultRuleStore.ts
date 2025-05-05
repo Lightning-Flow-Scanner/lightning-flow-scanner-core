@@ -19,6 +19,7 @@ import { SameRecordFieldUpdates } from "../rules/SameRecordFieldUpdates";
 import { TriggerOrder } from "../rules/TriggerOrder";
 import { GetRecordAllFields } from "../rules/GetRecordAllFields";
 import { HardcodedUrl } from "../rules/HardcodedUrl";
+import { RecursiveAfterUpdate } from "../rules/RecursiveAfterUpdate";
 
 export const DefaultRuleStore: object = {
   APIVersion,
@@ -45,4 +46,5 @@ export const DefaultRuleStore: object = {
 export const BetaRuleStore: object = {
   GetRecordAllFields,
   HardcodedUrl,
+  RecursiveAfterUpdate,
 };
