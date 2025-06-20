@@ -29,7 +29,8 @@
     "clean": "rm -rf out dist types",
     "vite:dist": "npm run swc:build && vite build",
     "stryker": "npm i -g @stryker-mutator/core @stryker-mutator/jest-runner && stryker run",
-    "prepush": "npm run clean && npm run swc:sim:pack && npm run test"
+    "prepush": "npm run clean && npm run swc:sim:pack && npm run test",
+    "deploy:flows": "node scripts/deployFlows.js"
   },
   "keywords": [],
   "license": "MIT",
