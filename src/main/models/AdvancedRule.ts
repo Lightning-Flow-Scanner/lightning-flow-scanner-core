@@ -1,8 +1,11 @@
 import { inspect } from "util";
+
+import type { IRuleDefinition } from "../interfaces/IRuleDefinition";
+
 import { AdvancedConfig } from "../interfaces/AdvancedRuleConfig";
 import { AdvancedRuleDefinition } from "../interfaces/AdvancedRuleDefintion";
 import { AdvancedSuppression } from "../interfaces/AdvancedSuppression";
-import { IRuleDefinition, ResultDetails } from "../internals/internals";
+import { ResultDetails } from "../internals/internals";
 import { Flow } from "./Flow";
 import { RuleCommon } from "./RuleCommon";
 import { RuleInfo } from "./RuleInfo";
