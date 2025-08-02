@@ -1,7 +1,7 @@
 import * as core from "../internals/internals";
 import { AdvancedRule } from "../models/AdvancedRule";
 
-export class UnconnectedElement extends AdvancedRule implements core.IRuleDefinition {
+export class UnconnectedElement extends AdvancedRule {
   constructor() {
     super({
       autoFixable: true,

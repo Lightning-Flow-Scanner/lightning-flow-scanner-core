@@ -1,17 +1,15 @@
 import * as core from "../internals/internals";
 import { AdvancedRule } from "../models/AdvancedRule";
 
-export class TriggerOrder extends AdvancedRule implements core.IRuleDefinition {
+export class TriggerOrder extends AdvancedRule {
   protected qualifiedRecordTriggerTypes: Set<string> = new Set<string>(["Create", "Update"]);
 
   constructor() {
     super(
       {
-        name: "TriggerOrder",
-        label: "Trigger Order",
+        autoFixable: false,
         description:
           "With flow trigger ordering, introduced in Spring '22, admins can now assign a priority value to their flows and guarantee their execution order. This priority value is not an absolute value, so the values need not be sequentially numbered as 1, 2, 3, and so on.",
-        supportedTypes: [core.FlowType.autolaunchedType],
         docRefs: [
           {
             label: "Learn more about flow ordering orchestration",
@@ -19,7 +17,9 @@ export class TriggerOrder extends AdvancedRule implements core.IRuleDefinition {
           },
         ],
         isConfigurable: false,
-        autoFixable: false,
+        label: "Trigger Order",
+        name: "TriggerOrder",
+        supportedTypes: [core.FlowType.autolaunchedType],
       },
       { severity: "note" }
     );

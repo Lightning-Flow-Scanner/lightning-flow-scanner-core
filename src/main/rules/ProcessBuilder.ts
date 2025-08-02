@@ -1,14 +1,12 @@
 import * as core from "../internals/internals";
 import { AdvancedRule } from "../models/AdvancedRule";
 
-export class ProcessBuilder extends AdvancedRule implements core.IRuleDefinition {
+export class ProcessBuilder extends AdvancedRule {
   constructor() {
     super({
-      name: "ProcessBuilder",
-      label: "No Process Builder",
+      autoFixable: false,
       description:
         "Salesforce is transitioning away from Workflow Rules and Process Builder in favor of Flow. Ensure you're prepared for this transition by migrating your organization's automation to Flow. Refer to official documentation for more information on the transition process and tools available.",
-      supportedTypes: core.FlowType.processBuilder,
       docRefs: [
         {
           label: "Process Builder Retirement",
@@ -16,7 +14,9 @@ export class ProcessBuilder extends AdvancedRule implements core.IRuleDefinition
         },
       ],
       isConfigurable: true,
-      autoFixable: false,
+      label: "No Process Builder",
+      name: "ProcessBuilder",
+      supportedTypes: core.FlowType.processBuilder,
     });
   }
 

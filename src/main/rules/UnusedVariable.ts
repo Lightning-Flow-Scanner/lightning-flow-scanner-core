@@ -1,17 +1,17 @@
-import { AdvancedRule } from "../models/AdvancedRule";
 import * as core from "../internals/internals";
+import { AdvancedRule } from "../models/AdvancedRule";
 
-export class UnusedVariable extends AdvancedRule implements core.IRuleDefinition {
+export class UnusedVariable extends AdvancedRule {
   constructor() {
     super({
-      name: "UnusedVariable",
-      label: "Unused Variable",
+      autoFixable: true,
       description:
         "To maintain the efficiency and manageability of your Flow, it's advisable to avoid including unconnected variables that are not in use.",
-      supportedTypes: [...core.FlowType.backEndTypes, ...core.FlowType.visualTypes],
       docRefs: [],
       isConfigurable: false,
-      autoFixable: true,
+      label: "Unused Variable",
+      name: "UnusedVariable",
+      supportedTypes: [...core.FlowType.backEndTypes, ...core.FlowType.visualTypes],
     });
   }
 

@@ -3,10 +3,7 @@ import { AdvancedSuppression } from "../interfaces/AdvancedSuppression";
 import * as core from "../internals/internals";
 import { AdvancedRule } from "../models/AdvancedRule";
 
-export class MissingFaultPath
-  extends AdvancedRule
-  implements AdvancedSuppression, core.IRuleDefinition
-{
+export class MissingFaultPath extends AdvancedRule implements AdvancedSuppression {
   protected applicableElements: string[] = [
     "recordLookups",
     "recordDeletes",

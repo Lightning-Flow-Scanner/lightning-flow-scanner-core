@@ -1,14 +1,12 @@
 import * as core from "../internals/internals";
 import { AdvancedRule } from "../models/AdvancedRule";
 
-export class UnsafeRunningContext extends AdvancedRule implements core.IRuleDefinition {
+export class UnsafeRunningContext extends AdvancedRule {
   constructor() {
     super(
       {
-        name: "UnsafeRunningContext",
-        label: "Unsafe Running Context",
+        autoFixable: false,
         description: `This flow is configured to run in System Mode without Sharing. This system context grants all running users the permission to view and edit all data in your org. Running a flow in System Mode without Sharing can lead to unsafe data access.`,
-        supportedTypes: [...core.FlowType.backEndTypes, ...core.FlowType.visualTypes],
         docRefs: [
           {
             label:
@@ -17,7 +15,9 @@ export class UnsafeRunningContext extends AdvancedRule implements core.IRuleDefi
           },
         ],
         isConfigurable: false,
-        autoFixable: false,
+        label: "Unsafe Running Context",
+        name: "UnsafeRunningContext",
+        supportedTypes: [...core.FlowType.backEndTypes, ...core.FlowType.visualTypes],
       },
       { severity: "warning" }
     );

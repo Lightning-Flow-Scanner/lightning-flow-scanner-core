@@ -1,7 +1,7 @@
 import * as core from "../internals/internals";
 import { AdvancedRule } from "../models/AdvancedRule";
 
-export class MissingNullHandler extends AdvancedRule implements core.IRuleDefinition {
+export class MissingNullHandler extends AdvancedRule {
   constructor() {
     super({
       autoFixable: false,
@@ -15,6 +15,7 @@ export class MissingNullHandler extends AdvancedRule implements core.IRuleDefini
     });
   }
 
+  // eslint-disable-next-line sonarjs/cognitive-complexity
   public execute(flow: core.Flow): core.RuleResult {
     const getOperations = ["recordLookups"];
     const getOperationElements: core.FlowNode[] = flow.elements.filter(
@@ -45,8 +46,8 @@ export class MissingNullHandler extends AdvancedRule implements core.IRuleDefini
       const resultIsUsed = flow.elements.some((el) => {
         if (el.name === getElement.name) return false;
         const json = JSON.stringify(el.element);
-        return resultReferences.some((ref) =>
-          json.includes(`"${ref}"`) || json.includes(`"${ref}.`)
+        return resultReferences.some(
+          (ref) => json.includes(`"${ref}"`) || json.includes(`"${ref}.`)
         );
       });
       if (!resultIsUsed) continue;

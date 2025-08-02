@@ -1,21 +1,19 @@
 import * as core from "../internals/internals";
 import { AdvancedRule } from "../models/AdvancedRule";
 
-export class SameRecordFieldUpdates extends AdvancedRule implements core.IRuleDefinition {
+export class SameRecordFieldUpdates extends AdvancedRule {
   protected qualifiedRecordTriggerTypes: Set<string> = new Set<string>([
     "Create",
-    "Update",
     "CreateAndUpdate",
+    "Update",
   ]);
 
   constructor() {
     super(
       {
-        name: "SameRecordFieldUpdates",
-        label: "Same Record Field Updates",
+        autoFixable: false,
         description:
           "Before-save same-record field updates allows you to update the record using variable assignments to `$Record`. This is significantly faster than doing another DML on the same-record that triggered the flow",
-        supportedTypes: [...core.FlowType.backEndTypes],
         docRefs: [
           {
             label: "Learn about same record field updates",
@@ -23,7 +21,9 @@ export class SameRecordFieldUpdates extends AdvancedRule implements core.IRuleDe
           },
         ],
         isConfigurable: false,
-        autoFixable: false,
+        label: "Same Record Field Updates",
+        name: "SameRecordFieldUpdates",
+        supportedTypes: [...core.FlowType.backEndTypes],
       },
       { severity: "warning" }
     );
