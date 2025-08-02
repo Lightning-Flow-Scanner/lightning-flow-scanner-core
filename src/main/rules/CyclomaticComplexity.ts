@@ -1,14 +1,16 @@
-import { AdvancedRule } from "../models/AdvancedRule";
 import * as core from "../internals/internals";
+import { AdvancedRule } from "../models/AdvancedRule";
 
-export class CyclomaticComplexity extends AdvancedRule implements core.IRuleDefinition {
+export class CyclomaticComplexity extends AdvancedRule {
+  private cyclomaticComplexityUnit: number = 0;
+
+  private defaultThreshold: number = 25;
+
   constructor() {
     super(
       {
-        name: "CyclomaticComplexity",
-        label: "Cyclomatic Complexity",
+        autoFixable: false,
         description: `The number of loops and decision rules, plus the number of decisions. Use a combination of 1) subflows and 2) breaking flows into multiple concise trigger ordered flows, to reduce the cyclomatic complexity within a single flow, ensuring maintainability and simplicity.`,
-        supportedTypes: core.FlowType.backEndTypes,
         docRefs: [
           {
             label: `Cyclomatic complexity is a software metric used to indicate the complexity of a program. It is a quantitative measure of the number of linearly independent paths through a program's source code.`,
@@ -16,15 +18,13 @@ export class CyclomaticComplexity extends AdvancedRule implements core.IRuleDefi
           },
         ],
         isConfigurable: true,
-        autoFixable: false,
+        label: "Cyclomatic Complexity",
+        name: "CyclomaticComplexity",
+        supportedTypes: core.FlowType.backEndTypes,
       },
       { severity: "note" }
     );
   }
-
-  private defaultThreshold: number = 25;
-
-  private cyclomaticComplexityUnit: number = 0;
 
   public execute(flow: core.Flow, options?: { threshold: number }): core.RuleResult {
     // Set Threshold
