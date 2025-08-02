@@ -1,7 +1,7 @@
 import * as core from "../internals/internals";
 import { AdvancedRule } from "../models/AdvancedRule";
 
-export class AutoLayout extends AdvancedRule implements core.IRuleDefinition {
+export class AutoLayout extends AdvancedRule {
   constructor() {
     super({
       autoFixable: false,
