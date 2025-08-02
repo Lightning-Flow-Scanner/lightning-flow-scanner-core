@@ -1,7 +1,7 @@
-import { FlowType, IRuleDefinition } from "../internals/internals";
+import { FlowType } from "../internals/internals";
 import { LoopRuleCommon } from "../models/LoopRuleCommon";
 
-export class DMLStatementInLoop extends LoopRuleCommon implements IRuleDefinition {
+export class DMLStatementInLoop extends LoopRuleCommon {
   constructor() {
     super({
       autoFixable: false,
