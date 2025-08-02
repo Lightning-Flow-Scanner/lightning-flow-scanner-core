@@ -1,4 +1,3 @@
-import type { IRuleDefinition } from "./main/interfaces/IRuleDefinition";
 import type { IRulesConfig } from "./main/interfaces/IRulesConfig";
 
 import { Compiler } from "./main/libs/Compiler";
@@ -39,4 +38,4 @@ export {
   scan,
   ScanResult,
 };
-export type { IRuleDefinition, IRulesConfig };
+export type { IRulesConfig };
