@@ -1,7 +1,7 @@
-import { FlowType, IRuleDefinition } from "../internals/internals";
+import { FlowType } from "../internals/internals";
 import { LoopRuleCommon } from "../models/LoopRuleCommon";
 
-export class ActionCallsInLoop extends LoopRuleCommon implements IRuleDefinition {
+export class ActionCallsInLoop extends LoopRuleCommon {
   constructor() {
     super(
       {

@@ -1,22 +1,22 @@
 import * as core from "../internals/internals";
 import { AdvancedRule } from "../models/AdvancedRule";
 
-export class APIVersion extends AdvancedRule implements core.IRuleDefinition {
+export class APIVersion extends AdvancedRule {
   constructor() {
     super({
-      name: "APIVersion",
-      label: "Outdated API Version",
+      autoFixable: false,
       description:
         "Introducing newer API components may lead to unexpected issues with older versions of Flows, as they might not align with the underlying mechanics. Starting from API version 50.0, the 'Api Version' attribute has been readily available on the Flow Object. To ensure smooth operation and reduce discrepancies between API versions, it is strongly advised to regularly update and maintain them.",
-      supportedTypes: core.FlowType.allTypes(),
       docRefs: [],
       isConfigurable: true,
-      autoFixable: false,
+      label: "Outdated API Version",
+      name: "APIVersion",
+      supportedTypes: core.FlowType.allTypes(),
     });
   }
 
   public execute(flow: core.Flow, options?: { expression: string }): core.RuleResult {
-    let flowAPIVersionNumber: number | null = null;
+    let flowAPIVersionNumber: null | number = null;
     if (flow.xmldata.apiVersion) {
       const flowAPIVersion = flow.xmldata.apiVersion;
       flowAPIVersionNumber = +flowAPIVersion;

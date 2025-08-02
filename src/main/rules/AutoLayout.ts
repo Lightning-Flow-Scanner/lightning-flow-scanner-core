@@ -4,14 +4,14 @@ import { AdvancedRule } from "../models/AdvancedRule";
 export class AutoLayout extends AdvancedRule implements core.IRuleDefinition {
   constructor() {
     super({
-      name: "AutoLayout",
-      label: "Auto-Layout Mode",
+      autoFixable: false,
       description:
         "With Canvas Mode set to Auto-Layout, Elements are spaced, connected, and aligned automatically, keeping your Flow neatly organized thus saving you time.",
-      supportedTypes: core.FlowType.allTypes(),
       docRefs: [],
       isConfigurable: true,
-      autoFixable: false,
+      label: "Auto-Layout Mode",
+      name: "AutoLayout",
+      supportedTypes: core.FlowType.allTypes(),
     });
   }
 
