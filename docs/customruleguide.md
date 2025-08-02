@@ -10,6 +10,7 @@ The Lightning Flow Scanner (LFS) core provides two primary capabilities: `parse`
 Rules in LFS are implemented as classes that conform to the `IRuleDefinition` interface, ensuring each rule exposes the required properties and methods for the scanner to recognize and execute them.
 
 > **Important:** Custom rules are recognized by the Lightning Flow Scanner only if your rule configuration in the flow-scanner config file specifies a valid `path` to the rule implementation. Ensure that each custom rule entry includes the `path` property pointing to the JavaScript file that exports your rule class.
+
 ```yml
 rules:
   MyCustomRuleToBeScanned:
@@ -17,9 +18,8 @@ rules:
     severity: error
 ```
 
-> **Note:** The `IRuleDefinition` interface is being replaced by the `AdvancedRule` base class. This transition allows backward compatibility, simplifies rule development and enables exception handling at the flow scan process level. Additionally, the introduction of `AdvancedSuppression` allows individual rules to define custom suppression logic, providing more granular control over rule enforcement.
+## Rule Structure
 
-## Rule Structure 
 A custom rule class typically follows this structure:
 
 ```typescript
@@ -42,7 +42,7 @@ export class CustomNamingConvention extends AdvancedRule {
 
   // Create custom execute logic
   public execute(flow: Flow, options?: { expression: string }): RuleResult {
-    
+
     const conventionApplied = (flow.name)?.startsWith('AcmeCorp_]');
     return (!conventionApplied ?
       new RuleResult(this, [new ResultDetails(new FlowAttribute(flow.name, 'name', 'The Name needs to start with AcmeCorp_'))]) :
@@ -53,50 +53,34 @@ export class CustomNamingConvention extends AdvancedRule {
 ```
 
 In this code:
+
 - We're importing necessary types and classes from the local core repository using a relative path (./lightning-flow-scanner-core/src/index). Make sure to adjust the path according to your local Core Module.
 - We're defining the CustomNamingConvention class, implementing the IRuleDefinition interface.
 - We're setting up the class properties such as name, label, description, etc., as per your provided example.
 - We're implementing the execute method, which performs the custom logic for your rule. This method takes a Flow object as input and returns a RuleResult.
 
-## Custom Rule Interface
-
-When creating custom rules, it's essential to adhere to the IRuleDefinition interface, which defines the required properties and methods for a rule definition:
-
-```typescript
-export interface IRuleDefinition {
-  name: string;
-  label: string;
-  description: string;
-  supportedTypes: string[];
-  type: string;
-  docRefs: { label: string, path: string }[];
-  isConfigurable: boolean;
-  uri?: string;
-  severity?: string;
-
-  execute(flow: Flow, ruleOptions?: {}): RuleResult;
-}
-```
-
 ## Flow Compiler
+
 The Flow Compiler is a powerful tool provided by the Lightning Flow Scanner Core for creating custom rules that require traversal of flow elements. This compiler enables efficient traversal through flow elements and is particularly useful for implementing complex logic for rule enforcement.
 
 ### Compiler Overview:
+
 The Compiler class consists of methods designed to traverse flow elements effectively:
+
 - Constructor: Initializes the visitedElements set, which keeps track of visited elements during traversal.
 - traverseFlow Method: Implements the Iterative Deepening Depth-First Search (IDDFS) algorithm for traversing flow elements. It iteratively explores each element, starting from a specified starting point, and visits each element by calling the provided callback function. The traversal continues until all elements are visited or until a specified end point is reached.
 - findNextElements Method: This private method is used internally by the traverseFlow method to find the next elements to visit based on the connectors of the current element. It examines the connectors of the current element and identifies the next elements to traverse.
 
 ### Example Rule Using the Compiler:
+
 ```typescript
 // Import the Compiler class
-import Compiler from 'path/to/your/local/core/module';
+import Compiler from "path/to/your/local/core/module";
 
 // Assume we have a custom rule that checks for the presence of certain elements in the flow
 // We'll define a custom rule class with an execute method that utilizes the Compiler to traverse through flow elements
 
-export class CustomRuleExample implements IRuleDefinition {
-
+export class CustomRuleExample extends AdvancedRule {
   constructor() {
     // Constructor logic
   }
@@ -108,7 +92,7 @@ export class CustomRuleExample implements IRuleDefinition {
     // Callback function to be executed on each visited element
     const visitCallback = (element: FlowNode) => {
       // Check if the current element meets certain conditions
-      if (element.subtype === 'screen') {
+      if (element.subtype === "screen") {
         // Perform custom logic based on the element type
         console.log(`Found a screen element named ${element.name}`);
         // Add the element to the result or perform other actions
@@ -126,6 +110,7 @@ export class CustomRuleExample implements IRuleDefinition {
 ```
 
 In this example:
+
 - We first import the Compiler class.
 - We define a custom rule class CustomRuleExample with an execute method.
 - Inside the execute method, we initialize a new instance of the Compiler.

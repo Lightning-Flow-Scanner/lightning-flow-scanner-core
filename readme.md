@@ -140,22 +140,6 @@ _Attempts to apply automatic fixes where available._
 
 ### Rule Configuration
 
-Using the rules section of your configurations, you can specify the list of rules to be run and provide custom rules. Furthermore, you can define the severity of violating specific rules and configure relevant attributes for some rules. Below is a breakdown of the available attributes of rule configuration:
-
-```json
-{
-  "rules": {
-    "<RuleName>": {
-      "severity": "<Severity>",
-      "expression": "<Expression>",
-      "path": "<Path>"
-    }
-  }
-}
-```
-
-### \*\*Beta\*\* Advanced Rule Configuration
-
 Advanced rules provide granular control by allowing rules to be intentionally disabled at the rule level, ensuring consistent application across all flows. Additionally, the concept of suppressions is introduced, enabling users to "whitelist" specific components. This mechanism allows for exceptions to be defined, offering flexibility in rule enforcement while maintaining overall governance and compliance.
 
 JSON
@@ -165,10 +149,10 @@ JSON
   "rules": {
     "<RuleName>": {
       "path": "local_path_of_your_js_file", // optional: when defined, this configuration will be used for the engine to recognize your custom rule
-      "severity": "<User Configured Severity>",
-      "expression": "<User Configured Expression which only applies to rules that take in `options`>",
+      "severity": "error",
+      "expression": ">=58",
       "disabled": "true", // optional: when true, rule will not be applied to all flows being scanned
-      "suppressions": ["<User Configured Suppressions>"] // optional: when defined, takes an array of suppressed elements (not based on name but on specific type)
+      "suppressions": ["LogACall"] // optional: when defined, takes an array of suppressed elements (not based on name but on specific type)
     }
   }
 }
@@ -188,16 +172,13 @@ rules:
 ```
 
 - **Severity:**
-
   - Optional values for severity are "error", "warning", and "note".
   - If severity is provided, it overwrites the default severity, which is "error".
 
 - **Expression:**
-
   - Expression is used to overwrite standard values in configurable rules.
 
 - **Path:**
-
   - If a path is provided, it can either replace an existing rule with a new rule definition or load a custom rule.
   - Ensure that the rule name used in the path matches the exported class name of the rule.
 
@@ -225,15 +206,12 @@ Specifying exceptions allows you to exclude specific scenarios from rule enforce
 ```
 
 - **FlowName:**
-
   - The name of the flow where exceptions apply.
 
 - **RuleName:**
-
   - The name of the rule for which exceptions are defined.
 
 - **ResultName:**
-
   - The specific result or condition within the rule for which exceptions are specified.
 
 ## Development Setup
