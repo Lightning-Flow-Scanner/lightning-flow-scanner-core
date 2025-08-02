@@ -1,7 +1,7 @@
-import { FlowType, IRuleDefinition } from "../internals/internals";
+import { FlowType } from "../internals/internals";
 import { LoopRuleCommon } from "../models/LoopRuleCommon";
 
-export class SOQLQueryInLoop extends LoopRuleCommon implements IRuleDefinition {
+export class SOQLQueryInLoop extends LoopRuleCommon {
   constructor() {
     super({
       autoFixable: false,

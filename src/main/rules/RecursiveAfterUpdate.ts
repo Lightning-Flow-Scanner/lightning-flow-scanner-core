@@ -1,7 +1,7 @@
 import * as core from "../internals/internals";
 import { AdvancedRule } from "../models/AdvancedRule";
 
-export class RecursiveAfterUpdate extends AdvancedRule implements core.IRuleDefinition {
+export class RecursiveAfterUpdate extends AdvancedRule {
   protected qualifiedRecordTriggerTypes: Set<string> = new Set<string>([
     "Create",
     "CreateAndUpdate",
