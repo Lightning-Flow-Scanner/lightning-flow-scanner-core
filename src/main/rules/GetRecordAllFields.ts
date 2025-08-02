@@ -1,7 +1,7 @@
 import * as core from "../internals/internals";
 import { AdvancedRule } from "../models/AdvancedRule";
 
-export class GetRecordAllFields extends AdvancedRule implements core.IRuleDefinition {
+export class GetRecordAllFields extends AdvancedRule {
   constructor() {
     super(
       {
