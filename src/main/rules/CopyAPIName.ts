@@ -1,17 +1,17 @@
 import * as core from "../internals/internals";
 import { AdvancedRule } from "../models/AdvancedRule";
 
-export class CopyAPIName extends AdvancedRule implements core.IRuleDefinition {
+export class CopyAPIName extends AdvancedRule {
   constructor() {
     super({
-      name: "CopyAPIName",
-      label: "Copy API Name",
+      autoFixable: false,
       description:
         "Maintaining multiple elements with a similar name, like 'Copy_X_Of_Element,' can diminish the overall readability of your Flow. When copying and pasting these elements, it's crucial to remember to update the API name of the newly created copy.",
-      supportedTypes: core.FlowType.allTypes(),
       docRefs: [],
       isConfigurable: false,
-      autoFixable: false,
+      label: "Copy API Name",
+      name: "CopyAPIName",
+      supportedTypes: core.FlowType.allTypes(),
     });
   }
 
