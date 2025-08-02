@@ -1,14 +1,12 @@
-import { AdvancedRule } from "../models/AdvancedRule";
 import * as core from "../internals/internals";
+import { AdvancedRule } from "../models/AdvancedRule";
 
-export class HardcodedId extends AdvancedRule implements core.IRuleDefinition {
+export class HardcodedId extends AdvancedRule {
   constructor() {
     super({
-      name: "HardcodedId",
-      label: "Hardcoded Id",
+      autoFixable: false,
       description:
         "Avoid hard-coding IDs as they are org-specific. Instead, pass them into variables at the start of the flow. You can achieve this by utilizing merge fields in URL parameters or employing a Get Records element.",
-      supportedTypes: core.FlowType.allTypes(),
       docRefs: [
         {
           label: "Flow Best Practices",
@@ -20,7 +18,9 @@ export class HardcodedId extends AdvancedRule implements core.IRuleDefinition {
         },
       ],
       isConfigurable: false,
-      autoFixable: false,
+      label: "Hardcoded Id",
+      name: "HardcodedId",
+      supportedTypes: core.FlowType.allTypes(),
     });
   }
 
